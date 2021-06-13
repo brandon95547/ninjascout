@@ -1,0 +1,19 @@
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+api
+.env
+vendor/
+web-build/
+web-report/
+settings.php
+google-services.json
+
+# macOS
+.DS_Store

@@ -1,1 +1,1 @@
-# ninjascout
+# ninjascoutapp

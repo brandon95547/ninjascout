@@ -1,0 +1,40 @@
+{
+  "name": "Ninja Scout",
+  "displayName": "Ninja Scout",
+  "expo": {
+    "name": "Ninja Scout",
+    "description": "Ninja Scout is a reseller's dream tool, utilizing Ebay's database of thousands of items sold, providing reports of trending brands and will be your virtual friend to guide you on what an item is worth, whether to purchase an item and if you can turn a profit.",
+    "slug": "ninja-scout",
+    "privacy": "public",
+    "version": "1.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/img/icon.png",
+    "scheme": "ninjascout",
+    "splash": {
+      "image": "./assets/img/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "packagerOpts": {},
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.raptorwebsolutions.ninjascoutapp",
+      "buildNumber": "1.0.22",
+      "associatedDomains": ["applinks:ninjascout.raptorwebsolutions.com"]
+    },
+    "android": {
+      "package": "com.raptorwebsolutions.ninjascoutapp",
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "MEDIA_LIBRARY",
+        "CAMERA_ROLL",
+        "NOTIFICATIONS",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    }
+  }
+}
