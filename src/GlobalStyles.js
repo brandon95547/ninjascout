@@ -5,9 +5,10 @@ const colors = {
   secondary: "#7fa5ff",
   dark: "#283f63",
   gray: "#3e4959",
-  money: "green",
+  blue: "#5260e3",
   failure: "orange",
   other: "purple",
+  light: "#EEE",
   bgWhite: {
     backgroundColor: "white",
   },
@@ -130,12 +131,6 @@ const headerStyles = {
   logo: {
     paddingTop: 12,
     paddingLeft: 16,
-  },
-  logoText: {
-    paddingTop: 15,
-    paddingLeft: 8,
-    fontSize: 16,
-    color: "white",
   },
   hamburger: {
     paddingTop: 12,

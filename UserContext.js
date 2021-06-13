@@ -22,11 +22,12 @@ class UserProvider extends Component {
     this.setState((prevState) => ({ token }));
   };
 
-  setAsyncStorage = async (key, data) => {
+  setAsyncStorage = async (key, value) => {
     try {
-      await AsyncStorage.setItem(key, data);
-    } catch (error) {
-      // Error saving data
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem(key, jsonValue);
+    } catch (e) {
+      // saving error
     }
   };
 

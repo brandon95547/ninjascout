@@ -19,10 +19,6 @@ import { componentStyles, colors } from "../../src/GlobalStyles";
 // this is our clobal context module to store global session state across screens
 import UserContext from "../../UserContext";
 
-// we need to import all images for react native
-import ninja from "../../assets/img/ninja.png";
-import dollaz from "../../assets/img/dollaz.jpeg";
-
 const global = require("../../src/styles/global");
 const home = require("../../src/styles/home");
 
@@ -93,39 +89,43 @@ export default class HomeScreen extends React.Component {
         >
           {this.showHeader()}
 
-          <ScrollView style={home.container}>
-            <Image style={home.logo} source={ninja} />
-            <Text style={home.logoText}>NINJA SCOUT</Text>
-
-            <Button
-              onPress={() => this.props.navigation.navigate(continueButton)}
-              style={styles.primaryButton}
-              block
-            >
-              <Text style={styles.joinButtonsText}>START PICKUP ORDER</Text>
-            </Button>
-
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                paddingBottom: 40,
-              }}
-            >
-              <Button
-                onPress={() => this.props.navigation.navigate("NewAccount")}
-                style={styles.joinButtons}
-                transparent
-              >
-                <Text style={styles.joinButtonsText}>Join</Text>
-              </Button>
-              <Button
-                onPress={() => this.props.navigation.navigate("Login")}
-                style={styles.joinButtons}
-                transparent
-              >
-                <Text style={styles.joinButtonsText}>Login</Text>
-              </Button>
+          <ScrollView contentContainerStyle={home.containerWrap}>
+            <View style={global.heading}>
+              <Text style={global.headingText}>Dashboard</Text>
+            </View>
+            <View style={home.container}>
+              <View style={home.itemBlock}>
+                <Icon
+                  style={home.itemBlockIcon}
+                  type="MaterialCommunityIcons"
+                  name="cloud-search-outline"
+                />
+                <Text style={home.itemBlockText}>Scout</Text>
+              </View>
+              <View style={home.itemBlock}>
+                <Icon
+                  style={home.itemBlockIcon}
+                  type="MaterialCommunityIcons"
+                  name="cloud-search-outline"
+                />
+                <Text style={home.itemBlockText}>Scout</Text>
+              </View>
+              <View style={home.itemBlock}>
+                <Icon
+                  style={home.itemBlockIcon}
+                  type="MaterialCommunityIcons"
+                  name="cloud-search-outline"
+                />
+                <Text style={home.itemBlockText}>Scout</Text>
+              </View>
+              <View style={home.itemBlock}>
+                <Icon
+                  style={home.itemBlockIcon}
+                  type="MaterialCommunityIcons"
+                  name="cloud-search-outline"
+                />
+                <Text style={home.itemBlockText}>Scout</Text>
+              </View>
             </View>
           </ScrollView>
         </MenuDrawer>

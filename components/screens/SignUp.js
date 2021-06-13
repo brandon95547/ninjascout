@@ -1,4 +1,5 @@
 import React, { Component, useContext } from "react";
+// import { APIHASH } from "@env";
 import * as Font from "expo-font";
 import { Input, Button } from "react-native-elements";
 import {
@@ -31,6 +32,7 @@ export default class HomeScreen extends React.Component {
       assetsLoaded: false,
       notification: {},
       token: "",
+      name: null,
       email: null,
       password: null,
       verify: null,
@@ -47,8 +49,6 @@ export default class HomeScreen extends React.Component {
   }
 
   async componentDidMount() {
-    const { setAsyncStorage, getAsyncStorage } = this.context;
-
     await Font.loadAsync({
       "poppins-normal": require("../../assets/fonts/Poppins_400_normal.ttf"),
     });
@@ -93,8 +93,11 @@ export default class HomeScreen extends React.Component {
   }
 
   createAccount() {
+    const { setAsyncStorage, getAsyncStorage } = this.context;
+
     var error = false;
     var data = {
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       verify: this.state.verify,
@@ -112,11 +115,22 @@ export default class HomeScreen extends React.Component {
       fetch("http://www.raptorwebsolutions.com/api/api.php", {
         method: "POST",
         body: JSON.stringify(data),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "X-APITOKEN": Math.round(
+            ((new Date().getUTCHours() * 3) / 2) * 10101
+          ),
+        },
       })
         .then((response) => response.json())
         .then((json) => {
           if (json.success) {
+            this.showAlert("Success!", "Your account has been created.");
+            setAsyncStorage("user", {
+              name: this.state.name,
+              email: this.state.email,
+            });
+            this.props.navigation.navigate("Home");
           } else {
             this.showAlert("Warning", json.message);
             this.setState({ submitted: false });
@@ -145,7 +159,21 @@ export default class HomeScreen extends React.Component {
             <ImageBackground source={ocean} style={global.image}>
               <Text style={login.signupTitle}>Sign Up</Text>
               <Input
-                autoCapitalize={false}
+                autoCapitalize="none"
+                placeholder="Name"
+                leftIcon={{
+                  type: "font-awesome",
+                  name: "user",
+                  color: "#CCC",
+                  size: 20,
+                }}
+                containerStyle={login.signupInput}
+                leftIconContainerStyle={login.signupInputIcon}
+                inputStyle={login.signupInputStyle}
+                onChangeText={(name) => this.setState({ name: name })}
+              />
+              <Input
+                autoCapitalize="none"
                 placeholder="Email"
                 leftIcon={{
                   type: "font-awesome",
@@ -159,7 +187,7 @@ export default class HomeScreen extends React.Component {
                 onChangeText={(email) => this.setState({ email: email })}
               />
               <Input
-                autoCapitalize={false}
+                autoCapitalize="none"
                 secureTextEntry={true}
                 placeholder="Password"
                 leftIcon={{
@@ -176,7 +204,7 @@ export default class HomeScreen extends React.Component {
                 }
               />
               <Input
-                autoCapitalize={false}
+                autoCapitalize="none"
                 secureTextEntry={true}
                 placeholder="Confirm"
                 leftIcon={{

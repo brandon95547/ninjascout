@@ -40,4 +40,18 @@ module.exports = StyleSheet.create({
     resizeMode: "cover",
     paddingBottom: 40,
   },
+  logoText: {
+    paddingTop: 16,
+    paddingLeft: 20,
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "white",
+  },
+  heading: {
+    paddingLeft: 20,
+    paddingTop: 20,
+  },
+  headingText: {
+    fontSize: 30,
+  },
 });

@@ -1,5 +1,6 @@
 "use strict";
 import { StyleSheet, Dimensions } from "react-native";
+import { colors } from "../GlobalStyles";
 
 const dimensions = Dimensions.get("window");
 const width = dimensions.width / 2.5;
@@ -9,9 +10,16 @@ const imageHeight = (327 / 451) * width;
 // console.log(imageWidth);
 
 module.exports = StyleSheet.create({
-  container: {
-    backgroundColor: "#2e2e5f",
+  containerWrap: {
+    backgroundColor: "white",
     height: "100%",
+  },
+  container: {
+    backgroundColor: "white",
+    height: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    padding: 10,
   },
   containerBackground: {
     resizeMode: "cover",
@@ -38,5 +46,20 @@ module.exports = StyleSheet.create({
   actions: {
     marginTop: "auto",
   },
-  logoWrap: {},
+  itemBlock: {
+    width: dimensions.width / 2 - 30,
+    height: dimensions.width / 2 - 30,
+    backgroundColor: colors.light,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10,
+  },
+  itemBlockText: {
+    fontSize: 24,
+    color: colors.blue,
+  },
+  itemBlockIcon: {
+    color: colors.blue,
+    fontSize: 48,
+  },
 });

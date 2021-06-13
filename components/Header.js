@@ -16,6 +16,8 @@ import UserContext from "../UserContext";
 import * as Notifications from "expo-notifications";
 import { Audio } from "expo-av";
 
+const global = require("../src/styles/global");
+
 const dimensions = Dimensions.get("window");
 const imageHeight = Math.round((dimensions.width * 9) / 16);
 const imageWidth = dimensions.width;
@@ -59,19 +61,9 @@ export default class Header extends React.Component {
   render() {
     const { user } = this.context;
 
-    let continueButton = user ? "Cart" : "Login";
-
     let leftButton = (
       <View style={headerStyles.viewRow}>
-        <TouchableOpacity style={headerStyles.logo}>
-          <Icon
-            style={{ color: "white" }}
-            type="MaterialCommunityIcons"
-            name="movie-roll"
-          />
-        </TouchableOpacity>
-
-        <Text style={headerStyles.logoText}>Midway Drive In</Text>
+        <Text style={global.logoText}>Ninja Scout</Text>
       </View>
     );
     if (this.props.leftButton == "interior") {
@@ -103,18 +95,6 @@ export default class Header extends React.Component {
             {leftButton}
 
             <View style={headerStyles.viewHamburger}>
-              <TouchableOpacity
-                style={headerStyles.hamburger}
-                onPress={() => {
-                  this.props.navigation.navigate(continueButton);
-                }}
-              >
-                <Icon
-                  style={{ color: "white" }}
-                  type="MaterialCommunityIcons"
-                  name="cart"
-                />
-              </TouchableOpacity>
               <TouchableOpacity
                 style={headerStyles.hamburger}
                 onPress={this.props.toggleOpen}
