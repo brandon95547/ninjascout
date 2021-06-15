@@ -4,10 +4,7 @@ import { colors } from "../GlobalStyles";
 
 const dimensions = Dimensions.get("window");
 const width = dimensions.width / 2.5;
-// ratio of logo 428 x 526
 const imageHeight = (327 / 451) * width;
-
-// console.log(imageWidth);
 
 module.exports = StyleSheet.create({
   containerWrap: {
@@ -56,10 +53,10 @@ module.exports = StyleSheet.create({
   },
   itemBlockText: {
     fontSize: 24,
-    color: colors.blue,
+    color: colors.blueDark,
   },
   itemBlockIcon: {
-    color: colors.blue,
+    color: colors.blueDark,
     fontSize: 48,
   },
 });

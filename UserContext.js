@@ -10,7 +10,7 @@ class UserProvider extends Component {
 
   // Context state
   state = {
-    user: null,
+    user: {},
     token: null,
   };
 

@@ -53,5 +53,14 @@ module.exports = StyleSheet.create({
   },
   headingText: {
     fontSize: 30,
+    marginBottom: 24,
+  },
+  commonText: {
+    fontSize: 18,
+  },
+  animatedBox: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 10,
   },
 });

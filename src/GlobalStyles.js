@@ -6,12 +6,8 @@ const colors = {
   dark: "#283f63",
   gray: "#3e4959",
   blue: "#5260e3",
-  failure: "orange",
-  other: "purple",
+  blueDark: "#4d56a9",
   light: "#EEE",
-  bgWhite: {
-    backgroundColor: "white",
-  },
 };
 
 const spacingStyles = {
@@ -111,6 +107,7 @@ const headerStyles = {
   viewContainer: {
     flexDirection: "row",
     paddingBottom: 10,
+    marginTop: 10,
     backgroundColor: colors.primary,
   },
   viewAndroid: {
@@ -183,11 +180,6 @@ const componentStyles = {
   },
   standardImg: {
     width: "100%",
-  },
-  animatedBox: {
-    flex: 1,
-    backgroundColor: "white",
-    padding: 10,
   },
   body: {
     marginTop: 0,

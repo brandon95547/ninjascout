@@ -84,7 +84,7 @@ export default class Header extends React.Component {
     }
     return (
       <>
-        <View style={{ backgroundColor: "#505780", paddingTop: 36 }}>
+        <View style={{ backgroundColor: "#BBB", paddingTop: 36 }}>
           <View
             style={
               Platform.OS == "ios"

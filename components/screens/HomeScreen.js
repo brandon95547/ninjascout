@@ -50,17 +50,6 @@ export default class HomeScreen extends React.Component {
     this.setState({ assetsLoaded: true });
   }
 
-  drawerContent = () => {
-    return (
-      <TouchableOpacity style={componentStyles.animatedBox}>
-        <SideBar
-          navigation={this.props.navigation}
-          toggleOpen={this.toggleOpen}
-        />
-      </TouchableOpacity>
-    );
-  };
-
   showHeader = () => {
     return (
       <Header navigation={this.props.navigation} toggleOpen={this.toggleOpen} />
@@ -81,7 +70,9 @@ export default class HomeScreen extends React.Component {
       return (
         <MenuDrawer
           open={this.state.open}
-          drawerContent={this.drawerContent()}
+          drawerContent={this.props.route.params.drawerContent(
+            this.props.navigation
+          )}
           drawerPercentage={65}
           animationTime={250}
           overlay={true}
@@ -94,37 +85,50 @@ export default class HomeScreen extends React.Component {
               <Text style={global.headingText}>Dashboard</Text>
             </View>
             <View style={home.container}>
-              <View style={home.itemBlock}>
-                <Icon
-                  style={home.itemBlockIcon}
-                  type="MaterialCommunityIcons"
-                  name="cloud-search-outline"
-                />
-                <Text style={home.itemBlockText}>Scout</Text>
+              <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.props.navigation.navigate("Scout");
+                  }}
+                  style={home.itemBlock}
+                >
+                  <Icon
+                    style={home.itemBlockIcon}
+                    type="MaterialCommunityIcons"
+                    name="cloud-search-outline"
+                  />
+                  <Text style={home.itemBlockText}>Scout</Text>
+                </TouchableOpacity>
               </View>
-              <View style={home.itemBlock}>
-                <Icon
-                  style={home.itemBlockIcon}
-                  type="MaterialCommunityIcons"
-                  name="cloud-search-outline"
-                />
-                <Text style={home.itemBlockText}>Scout</Text>
+              <View>
+                <TouchableOpacity style={home.itemBlock}>
+                  <Icon
+                    style={home.itemBlockIcon}
+                    type="MaterialCommunityIcons"
+                    name="trending-up"
+                  />
+                  <Text style={home.itemBlockText}>Trending</Text>
+                </TouchableOpacity>
               </View>
-              <View style={home.itemBlock}>
-                <Icon
-                  style={home.itemBlockIcon}
-                  type="MaterialCommunityIcons"
-                  name="cloud-search-outline"
-                />
-                <Text style={home.itemBlockText}>Scout</Text>
+              <View>
+                <TouchableOpacity style={home.itemBlock}>
+                  <Icon
+                    style={home.itemBlockIcon}
+                    type="MaterialCommunityIcons"
+                    name="cog"
+                  />
+                  <Text style={home.itemBlockText}>Settings</Text>
+                </TouchableOpacity>
               </View>
-              <View style={home.itemBlock}>
-                <Icon
-                  style={home.itemBlockIcon}
-                  type="MaterialCommunityIcons"
-                  name="cloud-search-outline"
-                />
-                <Text style={home.itemBlockText}>Scout</Text>
+              <View>
+                <TouchableOpacity style={home.itemBlock}>
+                  <Icon
+                    style={home.itemBlockIcon}
+                    type="MaterialCommunityIcons"
+                    name="chart-bar"
+                  />
+                  <Text style={home.itemBlockText}>Reports</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </ScrollView>

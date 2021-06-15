@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, AsyncStorage, TouchableOpacity, StyleSheet } from "react-native";
-// note when pulling in Text component from native-base, it gives a uppercase prop error
 import {
   Container,
   Content,
@@ -16,6 +15,7 @@ import UserContext from "../UserContext";
 export default class SideBar extends React.Component {
   constructor(props) {
     super(props);
+    console.log("sidebar", this.props);
   }
 
   logOut = async function () {
@@ -100,7 +100,7 @@ export default class SideBar extends React.Component {
       );
 
     return (
-      <List style={{ marginTop: 24 }}>
+      <List style={{ marginTop: 80 }}>
         <ListItem selected>
           <Left>
             <TouchableOpacity

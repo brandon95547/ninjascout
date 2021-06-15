@@ -55,17 +55,6 @@ export default class HomeScreen extends React.Component {
     this.setState({ assetsLoaded: true });
   }
 
-  drawerContent = () => {
-    return (
-      <TouchableOpacity style={componentStyles.animatedBox}>
-        <SideBar
-          navigation={this.props.navigation}
-          toggleOpen={this.toggleOpen}
-        />
-      </TouchableOpacity>
-    );
-  };
-
   showHeader = () => {
     if (1 === 3) {
       return (
@@ -147,7 +136,9 @@ export default class HomeScreen extends React.Component {
       return (
         <MenuDrawer
           open={this.state.open}
-          drawerContent={this.drawerContent()}
+          drawerContent={this.props.route.params.drawerContent(
+            this.props.navigation
+          )}
           drawerPercentage={65}
           animationTime={250}
           overlay={true}
