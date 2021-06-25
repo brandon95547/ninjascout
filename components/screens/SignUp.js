@@ -1,5 +1,4 @@
 import React, { Component, useContext } from "react";
-// import { APIHASH } from "@env";
 import * as Font from "expo-font";
 import { Input, Button } from "react-native-elements";
 import {
@@ -101,16 +100,19 @@ export default class HomeScreen extends React.Component {
     }
 
     if (!error) {
-      fetch("http://www.raptorwebsolutions.com/api/api.php", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          "X-APITOKEN": Math.round(
-            ((new Date().getUTCHours() * 3) / 2) * 10101
-          ),
-        },
-      })
+      fetch(
+        "http://www.raptorwebsolutions.com/api/api.php?request=createAccount",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            "X-APITOKEN": Math.round(
+              ((new Date().getUTCHours() * 3) / 2) * 10101
+            ),
+          },
+        }
+      )
         .then((response) => response.json())
         .then((json) => {
           if (json.success) {

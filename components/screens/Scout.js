@@ -10,11 +10,13 @@ import {
   Modal,
   TouchableHighlight,
 } from "react-native";
-import { Input, Button } from "react-native-elements";
+import { Input, Icon } from "react-native-elements";
 import MenuDrawer from "react-native-side-drawer";
 import Header from "../Header";
-import SideBar from "../SideBar";
+import * as Speech from "expo-speech";
 import { componentStyles, colors } from "../../src/GlobalStyles";
+import { Asset } from "expo-asset";
+import * as FileSystem from "expo-file-system";
 
 // this is our clobal context module to store global session state across screens
 import UserContext from "../../UserContext";
@@ -40,6 +42,21 @@ export default class HomeScreen extends React.Component {
 
   static contextType = UserContext;
 
+  speak = () => {
+    const thingToSay = "that would be nice.";
+    Speech.speak(thingToSay);
+  };
+
+  async encodeAudioFile(fileUriBase64) {
+    try {
+      const content = await FileSystem.readAsStringAsync(fileUriBase64);
+      return base64.fromByteArray(stringToUint8Array(content));
+    } catch (e) {
+      console.warn("fileToBase64()", e.message);
+      return "";
+    }
+  }
+
   setModalVisible(value) {
     this.setState({ modalVisible: value });
   }
@@ -49,6 +66,47 @@ export default class HomeScreen extends React.Component {
       "poppins-normal": require("../../assets/fonts/Poppins_400_normal.ttf"),
     });
     this.setState({ assetsLoaded: true });
+    this.speak();
+    // An audio resource
+    const resource = require("../../assets/audio/449481__12125065__hello.mp3");
+    // const resource = require('./assets/icon.png');
+    const asset = Asset.fromModule(resource);
+    await asset.downloadAsync();
+
+    // Base64 encoding for reading & writing
+    // console.log("filesystem", FileSystem.EncodingType);
+    const options = { encoding: FileSystem.EncodingType.Base64 };
+    // Read the audio resource from it's local Uri
+    const data = await FileSystem.readAsStringAsync(asset.localUri, options);
+
+    // Print the base64 data
+    // console.log(data);
+
+    var data2 = {
+      base64: data,
+    };
+
+    fetch("http://www.raptorwebsolutions.com/api/api.php", {
+      method: "POST",
+      body: JSON.stringify(data2),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "X-APITOKEN": Math.round(((new Date().getUTCHours() * 3) / 2) * 10101),
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log("json", json);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async saveToPhoneLibrary() {
+    //call the function that creates a new (if not already existing) album
+    this.createAudioAsset()
+      //then save the created asset to the phone's media library
+      .then((asset) => MediaLibrary.saveToLibraryAsync(asset))
+      .catch((err) => console.log("media library save asset err", err));
   }
 
   showHeader = () => {
@@ -66,6 +124,7 @@ export default class HomeScreen extends React.Component {
     const { user } = this.context;
 
     let continueButton = user ? "StartPickup" : "Login";
+    const searchInput = React.createRef();
 
     if (assetsLoaded) {
       return (
@@ -89,20 +148,26 @@ export default class HomeScreen extends React.Component {
               <Text style={global.commonText}>
                 Search for an item by typing, using audio or a barcode scanner.
               </Text>
-              <Input
-                autoCapitalize="none"
-                placeholder="Type a keyword..."
-                rightIcon={{
-                  type: "font-awesome",
-                  name: "microphone",
-                  color: "#777",
-                  size: 20,
-                }}
-                containerStyle={scout.input}
-                rightIconContainerStyle={scout.inputIcon}
-                inputStyle={scout.inputStyle}
-                onChangeText={(keyword) => this.setState({ keyword: keyword })}
-              />
+              <View style={scout.searchWrap}>
+                <Input
+                  ref={searchInput}
+                  autoCapitalize="none"
+                  placeholder="Type a keyword..."
+                  containerStyle={scout.input}
+                  rightIconContainerStyle={scout.inputIcon}
+                  inputStyle={scout.inputStyle}
+                  onChangeText={(keyword) =>
+                    this.setState({ keyword: keyword })
+                  }
+                />
+                <Icon
+                  raised
+                  name="microphone"
+                  type="font-awesome"
+                  color="#777"
+                  onPress={() => console.log("hello")}
+                />
+              </View>
             </View>
           </ScrollView>
         </MenuDrawer>

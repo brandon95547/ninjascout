@@ -12,8 +12,12 @@ module.exports = StyleSheet.create({
   container: {
     padding: 20,
   },
+  searchWrap: {
+    display: "flex",
+    flexDirection: "row",
+  },
   input: {
-    width: dimensions.width * 0.9,
+    width: dimensions.width * 0.75,
     alignSelf: "center",
     color: "white",
     fontSize: 16,
