@@ -5,7 +5,6 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  StyleSheet,
   ScrollView,
   Modal,
   TouchableHighlight,
@@ -17,6 +16,7 @@ import * as Speech from "expo-speech";
 import { componentStyles, colors } from "../../src/GlobalStyles";
 import { Asset } from "expo-asset";
 import * as FileSystem from "expo-file-system";
+import { Audio } from "expo-av";
 
 // this is our clobal context module to store global session state across screens
 import UserContext from "../../UserContext";
@@ -35,6 +35,7 @@ export default class HomeScreen extends React.Component {
       notification: {},
       token: "",
       keyword: "",
+      recording: null,
     };
 
     this.toggleOpen = this.toggleOpen.bind(this);
@@ -47,37 +48,89 @@ export default class HomeScreen extends React.Component {
     Speech.speak(thingToSay);
   };
 
-  async encodeAudioFile(fileUriBase64) {
-    try {
-      const content = await FileSystem.readAsStringAsync(fileUriBase64);
-      return base64.fromByteArray(stringToUint8Array(content));
-    } catch (e) {
-      console.warn("fileToBase64()", e.message);
-      return "";
-    }
-  }
-
   setModalVisible(value) {
     this.setState({ modalVisible: value });
   }
 
-  async componentDidMount() {
-    await Font.loadAsync({
-      "poppins-normal": require("../../assets/fonts/Poppins_400_normal.ttf"),
+  async startRecording() {
+    try {
+      // console.log("Requesting permissions..");
+      await Audio.requestPermissionsAsync();
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      });
+      // console.log("Starting recording..");
+      const recording = new Audio.Recording();
+
+      const RECORDING_OPTIONS_PRESET_LOW_QUALITY = {
+        android: {
+          extension: ".wav",
+          outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_MPEG_4,
+          audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_AMR_NB,
+          sampleRate: 44100,
+          numberOfChannels: 2,
+          bitRate: 128000,
+        },
+        ios: {
+          extension: ".wav",
+          outputFormat: Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_LINEARPCM,
+          audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_MIN,
+          sampleRate: 22000,
+          numberOfChannels: 1,
+          // bitRate: 128000,
+          // linearPCMBitDepth: 16,
+          // linearPCMIsBigEndian: false,
+          // linearPCMIsFloat: false,
+        },
+      };
+
+      await recording.prepareToRecordAsync(
+        RECORDING_OPTIONS_PRESET_LOW_QUALITY
+      );
+      await recording.startAsync();
+      this.setState({ recording: recording });
+      // play recording started sound
+      // console.log("Recording started");
+      setTimeout(() => {
+        this.stopRecording();
+      }, 3000);
+    } catch (err) {
+      console.error("Failed to start recording", err);
+    }
+  }
+
+  async stopRecording() {
+    console.log("Stopping recording..");
+    // console.log(this.recording);
+    // this.setState({ recording: undefined });
+    await this.state.recording.stopAndUnloadAsync();
+    const uri = this.state.recording.getURI();
+    // console.log("Recording stopped and stored at", uri);
+    // console.log(FileSystem);
+    await FileSystem.moveAsync({
+      from: uri,
+      to: FileSystem.documentDirectory + "speech.wav",
     });
-    this.setState({ assetsLoaded: true });
-    this.speak();
+    this.voiceToText();
+    // console.log(FileSystem.documentDirectory);
+  }
+
+  async voiceToText() {
     // An audio resource
-    const resource = require("../../assets/audio/449481__12125065__hello.mp3");
-    // const resource = require('./assets/icon.png');
-    const asset = Asset.fromModule(resource);
-    await asset.downloadAsync();
+    // const resource = require("../../assets/audio/recording-36806D7F-6532-4466-9202-A48CC980CDDE.aac");
+    // const asset = Asset.fromModule(resource);
+    // await asset.downloadAsync();
 
     // Base64 encoding for reading & writing
     // console.log("filesystem", FileSystem.EncodingType);
     const options = { encoding: FileSystem.EncodingType.Base64 };
     // Read the audio resource from it's local Uri
-    const data = await FileSystem.readAsStringAsync(asset.localUri, options);
+    // const data = await FileSystem.readAsStringAsync(asset.localUri, options);
+    const data = await FileSystem.readAsStringAsync(
+      FileSystem.documentDirectory + "speech.wav",
+      options
+    );
 
     // Print the base64 data
     // console.log(data);
@@ -86,14 +139,21 @@ export default class HomeScreen extends React.Component {
       base64: data,
     };
 
-    fetch("http://www.raptorwebsolutions.com/api/api.php", {
-      method: "POST",
-      body: JSON.stringify(data2),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        "X-APITOKEN": Math.round(((new Date().getUTCHours() * 3) / 2) * 10101),
-      },
-    })
+    // console.log(data2);
+
+    fetch(
+      "http://www.raptorwebsolutions.com/api/api.php?request=translateVoice",
+      {
+        method: "POST",
+        body: JSON.stringify(data2),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "X-APITOKEN": Math.round(
+            ((new Date().getUTCHours() * 3) / 2) * 10101
+          ),
+        },
+      }
+    )
       .then((response) => response.json())
       .then((json) => {
         console.log("json", json);
@@ -101,12 +161,20 @@ export default class HomeScreen extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  async saveToPhoneLibrary() {
-    //call the function that creates a new (if not already existing) album
-    this.createAudioAsset()
-      //then save the created asset to the phone's media library
-      .then((asset) => MediaLibrary.saveToLibraryAsync(asset))
-      .catch((err) => console.log("media library save asset err", err));
+  async componentDidMount() {
+    await Font.loadAsync({
+      "poppins-normal": require("../../assets/fonts/Poppins_400_normal.ttf"),
+    });
+    this.setState({ assetsLoaded: true });
+    this.playSound();
+  }
+
+  async playSound() {
+    const { sound } = await Audio.Sound.createAsync(
+      require("../../assets/audio/speech.mp3")
+    );
+    await sound.setVolumeAsync(0.5);
+    await sound.playAsync();
   }
 
   showHeader = () => {
@@ -165,7 +233,7 @@ export default class HomeScreen extends React.Component {
                   name="microphone"
                   type="font-awesome"
                   color="#777"
-                  onPress={() => console.log("hello")}
+                  onPress={() => this.startRecording()}
                 />
               </View>
             </View>
