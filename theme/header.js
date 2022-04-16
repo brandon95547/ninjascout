@@ -5,8 +5,14 @@ const windowHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
   logo: {
-    flex: 1,
-    aspectRatio: 0.25,
-    resizeMode: "contain",
+    width: windowWidth / 2,
+    height: windowWidth / 2.75,
+    marginTop: 100,
+    marginLeft: -44,
+  },
+  logoText: {
+    color: "white",
+    marginTop: 10,
+    fontSize: 30,
   },
 });
