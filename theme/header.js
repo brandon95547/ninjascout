@@ -8,11 +8,12 @@ export default StyleSheet.create({
     width: windowWidth / 2,
     height: windowWidth / 2.75,
     marginTop: 100,
-    marginLeft: -44,
+    marginLeft: -44
   },
   logoText: {
     color: "white",
     marginTop: 10,
     fontSize: 30,
+    marginBottom: 30
   },
 });
