@@ -5,15 +5,16 @@ const windowHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
   logo: {
-    width: windowWidth / 2,
-    height: windowWidth / 2.75,
+    width: windowWidth / 3,
+    height: windowWidth / 4,
     marginTop: 100,
     marginLeft: -44
   },
   logoText: {
     color: "white",
-    marginTop: 10,
+    marginTop: 5,
     fontSize: 30,
-    marginBottom: 30
+    marginBottom: 30,
+    fontFamily: "Montserrat"
   },
 });

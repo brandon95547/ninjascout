@@ -1,20 +1,13 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  container: {
-    display: "flex",
-    backgroundColor: "#1f5e93",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    height: "100%",
-  },
   input: {
-    backgroundColor: "#222",
+    backgroundColor: "#335979",
     color: "white",
     paddingVertical: 15,
     borderRadius: 4,
     width: "100%",
-    paddingLeft: 73
+    paddingLeft: 60
   },
   inputWrap: {
     width: '85%',
@@ -24,9 +17,16 @@ export default StyleSheet.create({
   },
   inputIcon: {
     position: 'absolute',
-    left: 20,
+    left: 16,
     zIndex: 1,
-    top: 6,
-    color: 'white'
+    top: 7,
+    color: '#CCC'
+  },
+  // spacing classes
+  mt1: {
+    marginTop: 12
+  },
+  mb1: {
+    marginBottom: 12
   }
 });
