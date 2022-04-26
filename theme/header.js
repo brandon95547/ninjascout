@@ -7,14 +7,14 @@ export default StyleSheet.create({
   logo: {
     width: windowWidth / 3,
     height: windowWidth / 4,
-    marginTop: 100,
-    marginLeft: -44
+    marginTop: -100,
+    marginLeft: -44,
   },
   logoText: {
     color: "white",
     marginTop: 5,
     fontSize: 30,
     marginBottom: 30,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
 });

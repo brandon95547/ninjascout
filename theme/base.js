@@ -7,26 +7,47 @@ export default StyleSheet.create({
     paddingVertical: 15,
     borderRadius: 4,
     width: "100%",
-    paddingLeft: 60
+    paddingLeft: 60,
   },
-  inputWrap: {
-    width: '85%',
-    display: 'flex',
-    alignItems: 'center',
-    position: 'relative'
+  button: {
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 46,
+    paddingVertical: 16,
+    width: "80%",
+  },
+  buttonWhite: {
+    backgroundColor: "white",
+  },
+  buttonText: {
+    textAlign: "center",
+    fontWeight: "bold",
   },
   inputIcon: {
-    position: 'absolute',
+    position: "absolute",
     left: 16,
     zIndex: 1,
     top: 7,
-    color: '#CCC'
+    color: "#CCC",
   },
   // spacing classes
   mt1: {
-    marginTop: 12
+    marginTop: 8,
   },
   mb1: {
-    marginBottom: 12
-  }
+    marginBottom: 8,
+  },
+  mt2: {
+    marginTop: 16,
+  },
+  mb2: {
+    marginBottom: 16,
+  },
+  // color classes
+  cWhite: {
+    color: "white",
+  },
+  cDark: {
+    color: "#111",
+  },
 });
