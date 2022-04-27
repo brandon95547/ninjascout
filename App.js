@@ -1,11 +1,14 @@
 // import { StatusBar } from "expo-status-bar";
-import { Text, View, Image, TextInput, TouchableOpacity } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
+// import Ionicons from "@expo/vector-icons/Ionicons";
+import HomeScreen from "./pages/HomeScreen";
+import CreateAccount from "./pages/CreateAccount";
+
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Font from "expo-font";
-import styles from "./theme/base";
-import homeStyles from "./theme/home";
-import header from "./theme/header";
+
+const Stack = createNativeStackNavigator();
 
 export default class App extends React.Component {
   constructor(props) {
@@ -38,24 +41,16 @@ export default class App extends React.Component {
   render() {
     if (this.state.fontsLoaded) {
       return (
-        <View style={homeStyles.container}>
-          <Image style={header.logo} source={require("./assets/ninja.png")} />
-          <Text style={header.logoText}>Ninja Scout</Text>
-          <View style={homeStyles.inputWrap}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={{ ...styles.cWhite, ...styles.buttonText }}>
-                SIGN UP
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{ ...styles.mt2, ...styles.button, ...styles.buttonWhite }}
-            >
-              <Text style={{ ...styles.cDark, ...styles.buttonText }}>
-                LOGIN
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "Welcome" }}
+            />
+            <Stack.Screen name="Profile" component={CreateAccount} />
+          </Stack.Navigator>
+        </NavigationContainer>
       );
     } else {
       return null;
