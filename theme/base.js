@@ -8,13 +8,24 @@ export default StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 20,
     width: "90%",
+    color: "white"
   },
   button: {
     borderWidth: 1,
     borderColor: "white",
     borderRadius: 46,
-    paddingVertical: 16,
-    width: "80%",
+    width: "90%",
+    height: 48,
+    display: "flex",
+    justifyContent: "center"
+  },
+  spinner: {
+    width: 32,
+    height: 32,
+  },
+  textLink: {
+    color: "white",
+    textDecorationLine: "underline"
   },
   buttonWhite: {
     backgroundColor: "white",
@@ -23,12 +34,8 @@ export default StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  inputIcon: {
-    position: "absolute",
-    left: 16,
-    zIndex: 1,
-    top: 7,
-    color: "#CCC",
+  pageIcon: {
+    marginTop: 60
   },
   // spacing classes
   mt1: {
@@ -42,6 +49,12 @@ export default StyleSheet.create({
   },
   mb2: {
     marginBottom: 16,
+  },
+  mt3: {
+    marginTop: 24,
+  },
+  mb3: {
+    marginBottom: 24,
   },
   // color classes
   cWhite: {

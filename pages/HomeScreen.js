@@ -22,7 +22,7 @@ export default class HomeScreen extends React.Component {
         <Image style={header.logo} source={require("../assets/ninja.png")} />
         <Text style={header.logoText}>Ninja Scout</Text>
         <View style={homeStyles.inputWrap}>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('CreateAccount')}>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Create Account')}>
             <Text style={{ ...styles.cWhite, ...styles.buttonText }}>
               SIGN UP
             </Text>

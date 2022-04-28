@@ -4,12 +4,6 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
-  logo: {
-    width: windowWidth / 3,
-    height: windowWidth / 4,
-    marginTop: 60,
-    marginLeft: -40,
-  },
   logoText: {
     color: "white",
     marginTop: 5,
