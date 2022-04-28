@@ -1,12 +1,15 @@
 // import { StatusBar } from "expo-status-bar";
 // import Ionicons from "@expo/vector-icons/Ionicons";
-import HomeScreen from "./pages/HomeScreen";
-import CreateAccount from "./pages/CreateAccount";
 
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Font from "expo-font";
+import { loadFonts } from "./utilities";
+
+// import pages
+import HomeScreen from "./pages/HomeScreen";
+import CreateAccount from "./pages/CreateAccount";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,22 +23,13 @@ export default class App extends React.Component {
     };
   }
 
-  async loadFonts() {
-    await Font.loadAsync({
-      // Load a font `Montserrat` from a static resource
-      Montserrat: require("./assets/fonts/Montserrat-Regular.ttf"),
-
-      // Any string can be used as the fontFamily name. Here we use an object to provide more control
-      "Montserrat-SemiBold": {
-        uri: require("./assets/fonts/Montserrat-SemiBold.ttf"),
-        display: Font.FontDisplay.FALLBACK,
-      },
-    });
-    this.setState({ fontsLoaded: true });
+  componentDidMount() {
+    loadFonts(this.resourcesLoaded);
   }
 
-  componentDidMount() {
-    this.loadFonts();
+  // using arrow functions keeps scope for this
+  resourcesLoaded = () => {
+    this.setState({ fontsLoaded: true });
   }
 
   render() {
