@@ -7,7 +7,7 @@ export default StyleSheet.create({
   logo: {
     width: windowWidth / 3,
     height: windowWidth / 4,
-    marginTop: -100,
+    marginTop: 60,
     marginLeft: -40,
   },
   logoText: {
@@ -16,5 +16,19 @@ export default StyleSheet.create({
     fontSize: 30,
     marginBottom: 30,
     fontFamily: "Montserrat",
+  },
+  container: {
+    display: "flex",
+    backgroundColor: "#136262",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    height: "100%",
+  },
+  inputWrap: {
+    width: "85%",
+    display: "flex",
+    alignItems: "center",
+    position: "relative",
+    marginTop: 50,
   },
 });

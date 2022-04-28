@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   input: {
-    backgroundColor: "#335979",
-    color: "white",
-    paddingVertical: 15,
-    borderRadius: 4,
-    width: "100%",
-    paddingLeft: 60,
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 46,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    width: "90%",
   },
   button: {
     borderWidth: 1,

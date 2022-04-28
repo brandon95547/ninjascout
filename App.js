@@ -1,11 +1,9 @@
 // import { StatusBar } from "expo-status-bar";
-// import Ionicons from "@expo/vector-icons/Ionicons";
 
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import * as Font from "expo-font";
-import { loadFonts } from "./utilities";
+import { Utilities } from "./utilities";
 
 // import pages
 import HomeScreen from "./pages/HomeScreen";
@@ -20,29 +18,27 @@ export default class App extends React.Component {
       text: "",
       password: "",
       fontsLoaded: false,
+      utilities: null
     };
   }
 
+  // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
   componentDidMount() {
-    loadFonts(this.resourcesLoaded);
-  }
-
-  // using arrow functions keeps scope for this
-  resourcesLoaded = () => {
-    this.setState({ fontsLoaded: true });
+    this.utilities = new Utilities
+    this.utilities.loadFonts(() => this.setState({ fontsLoaded: true }))
   }
 
   render() {
     if (this.state.fontsLoaded) {
       return (
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator initialRouteName="Home">
             <Stack.Screen
               name="Home"
               component={HomeScreen}
-              options={{ title: "Welcome" }}
+              options={{ title: "Home" }}
             />
-            <Stack.Screen name="Profile" component={CreateAccount} />
+            <Stack.Screen name="CreateAccount" component={CreateAccount} />
           </Stack.Navigator>
         </NavigationContainer>
       );
