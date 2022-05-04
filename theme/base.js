@@ -17,7 +17,8 @@ export default StyleSheet.create({
     width: "90%",
     height: 48,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   spinner: {
     width: 32,
