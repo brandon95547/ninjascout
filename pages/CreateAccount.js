@@ -77,18 +77,20 @@ export default class CreateAccount extends React.Component {
             style={styles.input}
             placeholder="Email"
             placeholderTextColor="white"
+            autoCapitalize="none"
             onChangeText={(email) => this.setState({email: email})}
-            value={this.email}
+            value={this.state.email}
           />
           <TextInput
             style={{
               ...styles.mt2,
               ...styles.input,
             }}
+            autoCapitalize="none"
             placeholder="Password"
             placeholderTextColor="white"
             onChangeText={(password) => this.setState({password: password})}
-            value={this.password}
+            value={this.state.password}
             secureTextEntry={true}
           />
           <TouchableOpacity

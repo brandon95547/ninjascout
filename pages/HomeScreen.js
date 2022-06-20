@@ -6,7 +6,7 @@ import header from "../theme/header";
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       open: false,
     };
