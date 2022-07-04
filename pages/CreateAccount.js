@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, ScrollView, Image, TouchableOpacity, TextInput } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Toast from 'react-native-root-toast'; 
 import React from "react";
@@ -7,6 +7,7 @@ import styles from "../theme/base";
 import createAccountStyles from "../theme/account";
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { Utilities } from "../utilities";
 
 export default class CreateAccount extends React.Component {
   constructor(props) {
@@ -15,25 +16,39 @@ export default class CreateAccount extends React.Component {
       email: '',
       password: '',
       isLoading: false,
-      apiEndpoint: Constants.manifest.extra.apiEndpoint
+      apiEndpoint: Constants.manifest.extra.apiEndpoint,
+      utilities: null
     };
+  }
+
+  // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
+  componentDidMount() {
+    this.utilities = new Utilities
   }
 
   signUp = () => {
     this.setState({ isLoading: true })
-    if (this.state.email && this.state.password) {
+    if (this.utilities.validateEmail(this.state.email) && this.state.password) {
       axios.post(`${this.state.apiEndpoint}?request=createAccount`, {
         email: this.state.email,
         password: this.state.password
       })
         .then(response => {
-        console.log(response.data)
-        const email = response.data.email || ''
-        const password = response.data.password || ''
+        // console.log(response.data)
+        const error = response.data.error || ''
+        const insertId = parseInt(response.data.insertId) || 0
         // Add a Toast on screen.
-        let toast = Toast.show(`${email} and ${password}`, {
-          duration: Toast.durations.LONG,
-        });
+        if (insertId) {
+          Toast.show('Account successfully created.', {
+            duration: Toast.durations.LONG,
+            backgroundColor: theme.success
+          })
+        } else {
+          Toast.show(error, {
+            duration: Toast.durations.LONG,
+            backgroundColor: theme.complimentary
+          })
+        }
         this.setState({ isLoading: false })
       })
         .catch(error => {
@@ -44,7 +59,7 @@ export default class CreateAccount extends React.Component {
         this.setState({ isLoading: false })
       });
     } else {
-      Toast.show('Email and password are required.', {
+      Toast.show('A valid email and password are required.', {
         duration: Toast.durations.LONG,
         backgroundColor: theme.complimentary
       });
@@ -69,7 +84,7 @@ export default class CreateAccount extends React.Component {
     }
 
     return (
-      <View style={createAccountStyles.container}>
+      <ScrollView contentContainerStyle={createAccountStyles.container}>
         <Ionicons style={styles.pageIcon} name="md-people-circle-outline" size={96} color="white" />
         <Text style={createAccountStyles.logoText}>Create Account</Text>
         <View style={createAccountStyles.inputWrap}>
@@ -106,7 +121,7 @@ export default class CreateAccount extends React.Component {
           </TouchableOpacity>
           <Text style={{ ...styles.mt3, ...styles.textLink }}>Forgot Password?</Text>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

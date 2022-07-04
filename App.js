@@ -5,12 +5,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootSiblingParent } from 'react-native-root-siblings';
 import { Utilities } from "./utilities";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 // import pages
 import HomeScreen from "./pages/HomeScreen";
 import CreateAccount from "./pages/CreateAccount";
 
 const Stack = createNativeStackNavigator();
+// lock the orientation to portrait mode
+ScreenOrientation.lockAsync(2)
 
 export default class App extends React.Component {
   constructor(props) {

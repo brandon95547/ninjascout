@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import styles from "../theme/base";
 import homeStyles from "../theme/home";
@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={homeStyles.container}>
+      <ScrollView contentContainerStyle={homeStyles.container}>
         <Image style={header.logo} source={require("../assets/ninja.png")} />
         <Text style={header.logoText}>Ninja Scout</Text>
         <View style={homeStyles.inputWrap}>
@@ -37,7 +37,7 @@ export default class HomeScreen extends React.Component {
             <Text style={{ ...styles.cDark, ...styles.buttonText }}>LOGIN</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
