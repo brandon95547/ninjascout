@@ -57,6 +57,12 @@ export default StyleSheet.create({
   mb3: {
     marginBottom: 24,
   },
+  ph1: {
+    paddingHorizontal: 20
+  },
+  text1: {
+    fontSize: 17
+  },
   // color classes
   cWhite: {
     color: "white",
@@ -64,4 +70,34 @@ export default StyleSheet.create({
   cDark: {
     color: "#111",
   },
+  headingWrap: {
+    display: "flex",
+    alignItems: "center"
+  },
+  heading1: {
+    fontSize: 26,
+    marginTop: 20,
+    fontWeight: "bold"
+  },
+  dataTable: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%"
+  },
+  dataTableRow: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "space-evenly"
+  },
+  circleIconWrap: {
+    borderWidth: 1,
+    borderRadius: 64 / 2,
+    width: 64,
+    height: 64,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });

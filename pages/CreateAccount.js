@@ -8,6 +8,7 @@ import createAccountStyles from "../theme/account";
 import axios from 'axios';
 import Constants from 'expo-constants';
 import { Utilities } from "../utilities";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class CreateAccount extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class CreateAccount extends React.Component {
   // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
   componentDidMount() {
     this.utilities = new Utilities
+    this.props.navigation.navigate('Dashboard')
   }
 
   signUp = () => {
@@ -43,6 +45,7 @@ export default class CreateAccount extends React.Component {
             duration: Toast.durations.LONG,
             backgroundColor: theme.success
           })
+          AsyncStorage.setItem('user', response.data);
         } else {
           Toast.show(error, {
             duration: Toast.durations.LONG,

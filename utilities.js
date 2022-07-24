@@ -4,12 +4,17 @@ import * as Font from "expo-font";
 export class Utilities {
   async loadFonts(callback) {
     await Font.loadAsync({
-      // Load a font `Montserrat` from a static resource
-      Montserrat: require("./assets/fonts/Montserrat-Regular.ttf"),
+      // Load a font `Roboto` from a static resource
+      Roboto: require("./assets/fonts/Roboto-Regular.ttf"),
 
       // Any string can be used as the fontFamily name. Here we use an object to provide more control
-      "Montserrat-SemiBold": {
-        uri: require("./assets/fonts/Montserrat-SemiBold.ttf"),
+      "Roboto-Bold": {
+        uri: require("./assets/fonts/Roboto-Bold.ttf"),
+        display: Font.FontDisplay.FALLBACK,
+      },
+      // Any string can be used as the fontFamily name. Here we use an object to provide more control
+      "Roboto-Light": {
+        uri: require("./assets/fonts/Roboto-Light.ttf"),
         display: Font.FontDisplay.FALLBACK,
       },
     });
