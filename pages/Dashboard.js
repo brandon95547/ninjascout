@@ -58,10 +58,19 @@ export default class Dashboard extends React.Component {
         </View>
         <View style={{ ...baseStyles.mt3, ...baseStyles.dataTable }}>
           <View style={baseStyles.dataTableRow}>
-            <View style={{...baseStyles.circleIconWrap, ...baseStyles.backgroundSuccess}}>
+            <View style={{...baseStyles.circleIconWrap, ...baseStyles.backgroundGold}}>
               <Ionicons name="md-logo-usd" size={32} color="white" />
             </View>
             <Text style={baseStyles.dataTableText}>Treasure Found</Text>
+            <Text style={baseStyles.dataTableEnd}>9</Text>
+          </View>
+        </View>
+        <View style={{ ...baseStyles.mt3, ...baseStyles.dataTable }}>
+          <View style={baseStyles.dataTableRow}>
+            <View style={{...baseStyles.circleIconWrap, ...baseStyles.backgroundSuccess}}>
+              <Ionicons name="md-logo-usd" size={32} color="white" />
+            </View>
+            <Text style={baseStyles.dataTableText}>Success Rate</Text>
             <Text style={baseStyles.dataTableEnd}>9</Text>
           </View>
         </View>

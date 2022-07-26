@@ -5,6 +5,7 @@ export const theme = {
   complimentary: '#D02828',
   success: '#24a23e',
   teal: '#1dc2d7',
-  hot: '#f98c14',
+  hot: '#fd4202',
   violet: '#9d00ff',
+  gold: '#e2b501'
 }

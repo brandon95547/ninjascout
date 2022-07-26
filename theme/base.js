@@ -131,6 +131,9 @@ export default StyleSheet.create({
   backgroundSuccess: {
     backgroundColor: theme.success
   },
+  backgroundGold: {
+    backgroundColor: theme.gold
+  },
   level: {
     fontSize: 18,
     color: theme.complimentary
