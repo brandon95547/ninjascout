@@ -15,7 +15,7 @@ export default StyleSheet.create({
     marginTop: "auto",
     marginBottom: 30,
     width: "60%",
-    backgroundColor: theme.primaryHot,
+    backgroundColor: theme.primary,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

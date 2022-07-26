@@ -13,7 +13,7 @@ export default StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderBottomColor: "#CCC"
+    borderBottomColor: "#DDD"
   },
   dataTableText: {
     fontSize: 18,

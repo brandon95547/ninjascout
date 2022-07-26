@@ -121,12 +121,17 @@ export default StyleSheet.create({
     fontWeight: "bold"
   },
   circleIconWrap: {
+    borderWidth: 1,
+    borderColor: "#888",
     borderRadius: 56 / 2,
     width: 56,
     height: 56,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  backgroundWhite: {
+    backgroundColor: "#FFF"
   },
   backgroundTeal: {
     backgroundColor: theme.teal
@@ -193,5 +198,11 @@ export default StyleSheet.create({
   },
   colorWhite: {
     color: '#FFF'
+  },
+  colorTeal: {
+    color: theme.teal
+  },
+  colorSuccess: {
+    color: theme.success
   },
 });
