@@ -7,5 +7,7 @@ export const theme = {
   teal: '#1dc2d7',
   hot: '#fd4202',
   violet: '#9d00ff',
-  gold: '#e2b501'
+  gold: '#e2b501',
+  blue: '#698196',
+  chill: '#666'
 }

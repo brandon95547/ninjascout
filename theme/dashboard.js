@@ -13,7 +13,6 @@ export default StyleSheet.create({
     letterSpacing: 1
   },
   logoWrap: {
-    backgroundColor: "#333",
     width: "100%",
     display: "flex",
     alignItems: "center",
@@ -24,7 +23,6 @@ export default StyleSheet.create({
   },
   container: {
     display: "flex",
-    backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "flex-start",
     height: "100%",

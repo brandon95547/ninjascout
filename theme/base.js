@@ -58,8 +58,42 @@ export default StyleSheet.create({
   mb3: {
     marginBottom: 24,
   },
+  ml1: {
+    marginLeft: 8
+  },
+  ml2: {
+    marginLeft: 16
+  },
+  ml3: {
+    marginLeft: 24
+  },
+  mr1: {
+    marginRight: 8
+  },
+  mr2: {
+    marginRight: 16
+  },
+  mr3: {
+    marginRight: 24
+  },
+  /* PADDING */
   ph1: {
-    paddingHorizontal: 20
+    paddingHorizontal: 8
+  },
+  ph2: {
+    paddingHorizontal: 16
+  },
+  ph3: {
+    paddingHorizontal: 24
+  },
+  pv1: {
+    paddingVertical: 8
+  },
+  pv2: {
+    paddingVertical: 16
+  },
+  pv3: {
+    paddingVertical: 24
   },
   text1: {
     fontSize: 17
@@ -79,6 +113,11 @@ export default StyleSheet.create({
     fontSize: 26,
     marginTop: 20,
     fontWeight: "bold"
+  },
+  dataTableWrap: {
+    backgroundColor: "white",
+    width: "88%",
+    borderRadius: 20
   },
   dataTable: {
     display: "flex",
@@ -134,8 +173,43 @@ export default StyleSheet.create({
   backgroundGold: {
     backgroundColor: theme.gold
   },
+  backgroundBlue: {
+    backgroundColor: theme.blue
+  },
   level: {
     fontSize: 18,
     color: theme.complimentary
-  }
+  },
+  /* TEXT SIZE */
+  textBold: {
+    fontWeight: "bold"
+  },
+  text1: {
+    fontSize: 16
+  },
+  text2: {
+    fontSize: 18
+  },
+  text3: {
+    fontSize: 20
+  },
+  text4: {
+    fontSize: 24
+  },
+  text5: {
+    fontSize: 30
+  },
+  /* COLORS */
+  colorChill: {
+    color: theme.chill
+  },
+  colorBlue: {
+    color: theme.blue
+  },
+  colorHot: {
+    color: theme.hot
+  },
+  colorWhite: {
+    color: '#FFF'
+  },
 });
