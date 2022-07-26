@@ -9,7 +9,7 @@ export default StyleSheet.create({
     marginTop: 5,
     fontSize: 30,
     marginBottom: 30,
-    fontFamily: "Montserrat",
+    fontFamily: "Roboto",
   },
   container: {
     display: "flex",

@@ -35,15 +35,34 @@ export default class Dashboard extends React.Component {
         </View>
         <View style={baseStyles.headingWrap}>
           <Text style={baseStyles.heading1}>Seller Level</Text>
+          <Text style={baseStyles.level}>Novice</Text>
           <Text style={{...baseStyles.text1, ...baseStyles.ph1}}>Your level will increase as you use the application.</Text>
         </View>
         <View style={{ ...baseStyles.mt3, ...baseStyles.dataTable }}>
           <View style={baseStyles.dataTableRow}>
-            <View style={baseStyles.circleIconWrap}>
-              <Ionicons name="md-stats-chart" size={32} color="black" />
+            <View style={{...baseStyles.circleIconWrap, ...baseStyles.backgroundTeal}}>
+              <Ionicons name="md-stats-chart" size={32} color="white" />
             </View>
-            <Text>label</Text>
-            <Text>data</Text>
+            <Text style={baseStyles.dataTableText}>Scans</Text>
+            <Text style={baseStyles.dataTableEnd}>9</Text>
+          </View>
+        </View>
+        <View style={{ ...baseStyles.mt3, ...baseStyles.dataTable }}>
+          <View style={baseStyles.dataTableRow}>
+            <View style={{...baseStyles.circleIconWrap, ...baseStyles.backgroundViolet}}>
+              <Ionicons name="md-pricetag" size={32} color="white" />
+            </View>
+            <Text style={baseStyles.dataTableText}>Brands Scanned</Text>
+            <Text style={baseStyles.dataTableEnd}>9</Text>
+          </View>
+        </View>
+        <View style={{ ...baseStyles.mt3, ...baseStyles.dataTable }}>
+          <View style={baseStyles.dataTableRow}>
+            <View style={{...baseStyles.circleIconWrap, ...baseStyles.backgroundSuccess}}>
+              <Ionicons name="md-logo-usd" size={32} color="white" />
+            </View>
+            <Text style={baseStyles.dataTableText}>Treasure Found</Text>
+            <Text style={baseStyles.dataTableEnd}>9</Text>
           </View>
         </View>
       </ScrollView>

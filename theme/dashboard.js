@@ -8,7 +8,7 @@ export default StyleSheet.create({
   logoText: {
     color: "white",
     fontSize: 26,
-    fontWeight: "Regular",
+    fontWeight: "normal",
     fontFamily: "Roboto",
     letterSpacing: 1
   },

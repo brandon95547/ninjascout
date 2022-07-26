@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from "../theme/variables"
 
 export default StyleSheet.create({
   input: {
@@ -89,15 +90,49 @@ export default StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     alignItems: "center",
-    justifyContent: "space-evenly"
+    paddingHorizontal: 26
+  },
+  dataTableText: {
+    fontSize: 20,
+    marginLeft: 20
+  },
+  dataTableEnd: {
+    marginLeft: "auto",
+    marginRight: 20,
+    fontSize: 22,
+    fontWeight: "bold"
   },
   circleIconWrap: {
-    borderWidth: 1,
     borderRadius: 64 / 2,
     width: 64,
     height: 64,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+  },
+  backgroundTeal: {
+    backgroundColor: theme.teal
+  },
+  backgroundPrimary: {
+    backgroundColor: theme.primary
+  },
+  backgroundSecondary: {
+    backgroundColor: theme.secondary
+  },
+  backgroundComplimentary: {
+    backgroundColor: theme.complimentary
+  },
+  backgroundHot: {
+    backgroundColor: theme.hot
+  },
+  backgroundViolet: {
+    backgroundColor: theme.violet
+  },
+  backgroundSuccess: {
+    backgroundColor: theme.success
+  },
+  level: {
+    fontSize: 18,
+    color: theme.complimentary
   }
 });
