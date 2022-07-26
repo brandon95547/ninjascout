@@ -8,8 +8,12 @@ export default StyleSheet.create({
     width: "100%"
   },
   badge: {
-    width: 120,
-    height: 90,
-    marginLeft: -34
+    width: 80,
+    height: 60,
   },
+  badgeLevelWrap: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center"
+  }
 });

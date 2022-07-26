@@ -5,33 +5,26 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default StyleSheet.create({
-  logoText: {
-    color: "white",
-    fontSize: 26,
-    fontWeight: "normal",
-    fontFamily: "Roboto",
-    letterSpacing: 1
-  },
-  logoWrap: {
-    width: "100%",
-    display: "flex",
-    alignItems: "center",
-    paddingVertical: 6
-  },
-  logoTextSpan: {
-    color: theme.success
-  },
   container: {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-start",
     height: "100%",
+    backgroundColor: "white",
+    alignItems: "center"
   },
-  inputWrap: {
-    width: "85%",
+  scanButton: {
+    marginTop: "auto",
+    marginBottom: 30,
+    width: "60%",
+    backgroundColor: theme.primaryHot,
     display: "flex",
+    flexDirection: "row",
     alignItems: "center",
-    position: "relative",
-    marginTop: 50,
+    justifyContent: "center",
+    padding: 16,
+    borderRadius: 28,
   },
+  scanButtonText: {
+    color: "white",
+    fontWeight: "bold"
+  }
 });

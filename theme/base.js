@@ -58,6 +58,9 @@ export default StyleSheet.create({
   mb3: {
     marginBottom: 24,
   },
+  ml_3: {
+    marginLeft: 3
+  },
   ml1: {
     marginLeft: 8
   },
@@ -66,6 +69,9 @@ export default StyleSheet.create({
   },
   ml3: {
     marginLeft: 24
+  },
+  mr_3: {
+    marginRight: 3
   },
   mr1: {
     marginRight: 8
@@ -114,43 +120,19 @@ export default StyleSheet.create({
     marginTop: 20,
     fontWeight: "bold"
   },
-  dataTableWrap: {
-    backgroundColor: "white",
-    width: "88%",
-    borderRadius: 20
-  },
-  dataTable: {
-    display: "flex",
-    flexDirection: "column",
-    width: "100%"
-  },
-  dataTableRow: {
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
-    paddingHorizontal: 26
-  },
-  dataTableText: {
-    fontSize: 20,
-    marginLeft: 20
-  },
-  dataTableEnd: {
-    marginLeft: "auto",
-    marginRight: 20,
-    fontSize: 22,
-    fontWeight: "bold"
-  },
   circleIconWrap: {
-    borderRadius: 64 / 2,
-    width: 64,
-    height: 64,
+    borderRadius: 56 / 2,
+    width: 56,
+    height: 56,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   backgroundTeal: {
     backgroundColor: theme.teal
+  },
+  backgroundTealDark: {
+    backgroundColor: theme.tealDark
   },
   backgroundPrimary: {
     backgroundColor: theme.primary
