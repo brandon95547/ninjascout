@@ -58,6 +58,12 @@ export default StyleSheet.create({
   mb3: {
     marginBottom: 24,
   },
+  mt4: {
+    marginTop: 32
+  },
+  mb4: {
+    marginBottom: 32
+  },
   ml_3: {
     marginLeft: 3
   },
@@ -130,14 +136,14 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  backgroundDark: {
+    backgroundColor: "#333"
+  },
   backgroundWhite: {
     backgroundColor: "#FFF"
   },
   backgroundTeal: {
     backgroundColor: theme.teal
-  },
-  backgroundTealDark: {
-    backgroundColor: theme.tealDark
   },
   backgroundPrimary: {
     backgroundColor: theme.primary
@@ -186,6 +192,12 @@ export default StyleSheet.create({
   text5: {
     fontSize: 30
   },
+  text6: {
+    fontSize: 36
+  },
+  text7: {
+    fontSize: 42
+  },
   /* COLORS */
   colorChill: {
     color: theme.chill
@@ -205,4 +217,13 @@ export default StyleSheet.create({
   colorSuccess: {
     color: theme.success
   },
+  colorSuccessLight: {
+    color: theme.successLight
+  },
+  colorLight: {
+    color: theme.light
+  },
+  colorLight2: {
+    color: theme.light2
+  }
 });

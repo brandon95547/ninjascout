@@ -1,0 +1,19 @@
+import { StyleSheet } from "react-native";
+import { theme } from "../../theme/variables"
+
+export default StyleSheet.create({
+  scanResultsWrap: {
+    display: "flex",
+    width: "100%",
+    alignItems: "center",
+    backgroundColor: theme.primary,
+    paddingTop: 16,
+    paddingBottom: 34,
+    borderBottomRightRadius: 30,
+    borderBottomLeftRadius: 30
+  },
+  scanResultsText: {
+    color: "white",
+    fontSize: theme.text2
+  }
+});

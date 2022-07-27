@@ -11,6 +11,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import HomeScreen from "./pages/HomeScreen";
 import CreateAccount from "./pages/CreateAccount";
 import Dashboard from "./pages/Dashboard";
+import Scan from "./pages/Scan";
 
 const Stack = createNativeStackNavigator();
 // lock the orientation to portrait mode
@@ -46,6 +47,7 @@ export default class App extends React.Component {
               />
               <Stack.Screen name="Create Account" component={CreateAccount} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
+              <Stack.Screen name="Scan" component={Scan} />
             </Stack.Navigator>
             </NavigationContainer>
           </RootSiblingParent>
