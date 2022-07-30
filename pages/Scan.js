@@ -9,6 +9,12 @@ import scanResultsStyles from "../theme/components/scanResults";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default class Scan extends React.Component {
+  state = { email: '' }
+
+  scan = (item) => {
+    console.log(item)
+  }
+
   render() {
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 0 : 60
     return (
@@ -22,7 +28,7 @@ export default class Scan extends React.Component {
               <Text style={{...scanResultsStyles.scanResultPass, ...baseStyles.ml_3}}>Pass!</Text>
             </View>
           </View>
-          <ScanForm />
+          <ScanForm scan={this.scan} email="testing@gmail.com" />
         </KeyboardAvoidingView>
       </ScrollView>
     );

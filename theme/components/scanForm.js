@@ -16,7 +16,7 @@ export default StyleSheet.create({
     paddingHorizontal: 12,
     backgroundColor: theme.light,
     width: "80%",
-    color: "white",
+    color: "#222",
     fontSize: 16
   },
   scanButton: {

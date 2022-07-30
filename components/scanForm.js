@@ -5,12 +5,7 @@ import baseStyles from "../theme/base";
 import scanFormStyles from "../theme/components/scanForm";
 
 export default class ScanForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      scanItem: '',
-    };
-  }
+  state = { scanItem: '' }
 
   render() { 
     return (
@@ -18,12 +13,12 @@ export default class ScanForm extends React.Component {
         <TextInput
             style={scanFormStyles.input}
             placeholder="Scan or Key Enter Item"
-            placeholderTextColor="black"
+            placeholderTextColor="#444"
             autoCapitalize="none"
             onChangeText={(scanItem) => this.setState({scanItem: scanItem})}
             value={this.state.scanItem}
           />
-          <TouchableOpacity style={{...scanFormStyles.scanButton}}>
+          <TouchableOpacity style={{...scanFormStyles.scanButton}} onPress={() => this.props.scan(this.state.scanItem)}>
             <Text style={{...scanFormStyles.scanButtonText, ...baseStyles.text3, ...baseStyles.mr2}}>Scan</Text>
             <Ionicons name="md-scan" size={24} color="white" />
           </TouchableOpacity>
