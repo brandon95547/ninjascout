@@ -5,14 +5,38 @@ import ScanResultsChart from "../components/scanResultsChart";
 import ScanForm from "../components/scanForm";
 import React from "react";
 import baseStyles from "../theme/base";
+import Constants from 'expo-constants';
 import scanResultsStyles from "../theme/components/scanResults";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default class Scan extends React.Component {
-  state = { email: '' }
+  state = { email: '', apiEndpoint: Constants.manifest.extra.apiEndpoint, isLoading: false }
 
   scan = (item) => {
-    console.log(item)
+    this.setState({ isLoading: true })
+    if (item) {
+      axios.post(`${this.state.apiEndpoint}?request=scanItem`, {
+        item,
+        apiKey: this.state.apiKey
+      })
+        .then(response => {
+        console.log(response.data)
+        const error = response.data.error || ''
+        
+        this.setState({ isLoading: false })
+      })
+        .catch(error => {
+        this.setState({ isLoading: false })
+      });
+    } else {
+      Toast.show('Please key enter or scan an item first.', {
+        duration: Toast.durations.LONG,
+        backgroundColor: theme.complimentary
+      });
+      setTimeout(() => {
+        this.setState({ isLoading: false })
+      }, 3000)
+    }
   }
 
   render() {

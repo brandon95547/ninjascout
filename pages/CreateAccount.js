@@ -11,16 +11,7 @@ import { Utilities } from "../utilities";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class CreateAccount extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      isLoading: false,
-      apiEndpoint: Constants.manifest.extra.apiEndpoint,
-      utilities: null
-    };
-  }
+  state = { email: '', password: '', isLoading: false, apiEndpoint: Constants.manifest.extra.apiEndpoint, apiKey: Constants.manifest.extra.apiKey, utilities: null }
 
   // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
   componentDidMount() {
@@ -33,7 +24,8 @@ export default class CreateAccount extends React.Component {
     if (this.utilities.validateEmail(this.state.email) && this.state.password) {
       axios.post(`${this.state.apiEndpoint}?request=createAccount`, {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        apiKey: this.state.apiKey
       })
         .then(response => {
         // console.log(response.data)

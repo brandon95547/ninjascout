@@ -5,5 +5,6 @@ export default {
   version: '1.0.0',
   extra: {
     apiEndpoint: process.env.API_ENDPOINT,
+    apiKey: process.env.API_KEY,
   },
 };
