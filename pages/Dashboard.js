@@ -29,7 +29,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={dashboardStyles.container}>
+      <ScrollView contentContainerStyle={{...baseStyles.container, ...baseStyles.backgroundWhite}}>
         <PlayerBadge />
         <DataTable />
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Scan')} style={{...dashboardStyles.scanButton}}>

@@ -10,10 +10,21 @@ export default StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 34,
     borderBottomRightRadius: 30,
-    borderBottomLeftRadius: 30
+    borderBottomLeftRadius: 30,
   },
   scanResultsText: {
     color: "white",
     fontSize: theme.text2
+  },
+  scanResultWrap: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+  },
+  scanResultPass: {
+    color: theme.success,
+    fontSize: theme.text5
   }
 });

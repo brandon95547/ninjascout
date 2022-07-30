@@ -2,6 +2,24 @@ import { StyleSheet } from "react-native";
 import { theme } from "../theme/variables"
 
 export default StyleSheet.create({
+  container: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flex: 1,
+    width: "100%"
+  },
+  grow: {
+    flexGrow: 1
+  },
+  keyboard: {
+    width: "100%",
+    display: "flex",
+    height: "100%",
+  },
+  keyboardInner: {
+    width: "100%"
+  },
   input: {
     borderWidth: 1,
     borderColor: "white",

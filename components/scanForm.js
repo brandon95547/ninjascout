@@ -24,7 +24,7 @@ export default class ScanForm extends React.Component {
             value={this.state.scanItem}
           />
           <TouchableOpacity style={{...scanFormStyles.scanButton}}>
-            <Text style={{...scanFormStyles.scanButtonText, ...baseStyles.text3, ...baseStyles.mr2}}>Scan Item</Text>
+            <Text style={{...scanFormStyles.scanButtonText, ...baseStyles.text3, ...baseStyles.mr2}}>Scan</Text>
             <Ionicons name="md-scan" size={24} color="white" />
           </TouchableOpacity>
       </View>

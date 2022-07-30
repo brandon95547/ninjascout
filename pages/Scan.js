@@ -1,33 +1,29 @@
-import { Text, View, ScrollView, Image, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, ScrollView, Image, KeyboardAvoidingView, TextInput } from "react-native";
+import { theme } from "../theme/variables"
 import ScanResults from "../components/scanResults";
+import ScanResultsChart from "../components/scanResultsChart";
 import ScanForm from "../components/scanForm";
 import React from "react";
-import { theme } from "../theme/variables"
-import dashboardStyles from "../theme/dashboard";
 import baseStyles from "../theme/base";
-import Constants from 'expo-constants';
-import { Utilities } from "../utilities";
+import scanResultsStyles from "../theme/components/scanResults";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default class Scan extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      apiEndpoint: Constants.manifest.extra.apiEndpoint,
-      utilities: null
-    };
-  }
-
-  // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
-  componentDidMount() {
-    this.utilities = new Utilities
-  }
-
   render() {
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 0 : 60
     return (
-      <ScrollView contentContainerStyle={dashboardStyles.container}>
-        <ScanResults />
-        <ScanForm />
+      <ScrollView contentContainerStyle={{...baseStyles.container}}>
+        <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
+          <View style={baseStyles.grow}>
+            <ScanResults />
+            <ScanResultsChart />
+            <View style={{...scanResultsStyles.scanResultWrap, ...baseStyles.mt2, ...baseStyles.mb3}}>
+              <Ionicons name="md-checkmark-circle" size={32} color={theme.success} />
+              <Text style={{...scanResultsStyles.scanResultPass, ...baseStyles.ml_3}}>Pass!</Text>
+            </View>
+          </View>
+          <ScanForm />
+        </KeyboardAvoidingView>
       </ScrollView>
     );
   }

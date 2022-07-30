@@ -3,6 +3,7 @@ export const theme = {
   primary: '#435285',
   secondary: '#621313',
   complimentary: '#D02828',
+  prominent: '#df9020',
   success: '#1e8834',
   successLight: '#28b445',
   teal: '#1694a5',

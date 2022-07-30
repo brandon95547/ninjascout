@@ -6,12 +6,11 @@ export default StyleSheet.create({
     display: "flex",
     width: "100%",
     alignItems: "center",
-    marginTop: "auto",
-    marginBottom: 20
+    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
-    borderColor: "#CCC",
+    borderColor: theme.prominent,
     borderRadius: 12,
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -22,7 +21,7 @@ export default StyleSheet.create({
   },
   scanButton: {
     marginTop: 16,
-    backgroundColor: theme.dark,
+    backgroundColor: theme.prominent,
     paddingHorizontal: 50,
     display: "flex",
     flexDirection: "row",

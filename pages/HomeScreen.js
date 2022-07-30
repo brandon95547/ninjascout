@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView contentContainerStyle={homeStyles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Image style={header.logo} source={require("../assets/ninja.png")} />
         <Text style={header.logoText}>Ninja Scout</Text>
         <View style={homeStyles.inputWrap}>
