@@ -1,5 +1,7 @@
 import { Text, View, ScrollView, Image, KeyboardAvoidingView, TextInput } from "react-native";
 import { theme } from "../theme/variables"
+import Toast from 'react-native-root-toast';
+import axios from 'axios';
 import ScanResults from "../components/scanResults";
 import ScanResultsChart from "../components/scanResultsChart";
 import ScanForm from "../components/scanForm";
@@ -10,7 +12,7 @@ import scanResultsStyles from "../theme/components/scanResults";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default class Scan extends React.Component {
-  state = { email: '', apiEndpoint: Constants.manifest.extra.apiEndpoint, isLoading: false }
+  state = { email: '', apiEndpoint: Constants.manifest.extra.apiEndpoint, isLoading: false, apiKey: Constants.manifest.extra.apiKey }
 
   scan = (item) => {
     this.setState({ isLoading: true })
