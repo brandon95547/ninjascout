@@ -7,6 +7,10 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     marginBottom: 20,
+    backgroundColor: '#CCC',
+    paddingVertical: 20,
+    borderTopWidth: 1,
+    borderColor: "#BBB"
   },
   input: {
     borderWidth: 1,

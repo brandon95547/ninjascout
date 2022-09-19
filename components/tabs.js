@@ -6,7 +6,7 @@ import tabsStyles from "../theme/components/tabs";
 export default class Tabs extends React.Component { 
   render() { 
     return (
-      <View style={{...tabsStyles.tabsWrap, ...baseStyles.mt4}}>
+      <View style={{...tabsStyles.tabsWrap, ...baseStyles.mt3}}>
         <View style={{...tabsStyles.tab}}>
           <Text style={{...tabsStyles.tabText}}>Low</Text>
           <Text style={{...tabsStyles.tabValue}}>$50</Text>

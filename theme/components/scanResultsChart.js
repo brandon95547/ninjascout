@@ -1,29 +1,48 @@
 import { StyleSheet } from "react-native";
 import { theme } from "../../theme/variables"
+import base from "../base";
 
 export default StyleSheet.create({
   scanResultsChartWrap: {
-    display: "flex",
+    height: '20%'
+  },
+  directions: {
+    alignItems: 'center'
+  },
+  directionsText: {
+    fontSize: 20,
+    color: base.primary
   },
   scanResultsChartInner: {
-    width: "100%"
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginHorizontal: 20
   },
   scanResultsChartRow: {
     display: "flex",
     flexDirection: "row",
     marginBottom: 10,
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "space-between"
   },
   scanResultsChartLabel: {
-    width: 50,
-    textAlign: "right",
-    marginRight: 10
+    fontSize: 18,
+    flex: 2
+  },
+  scanResultsChartPrice: {
+    fontSize: 17,
+    textAlign: 'center',
+    flex: .35,
+    fontWeight: 'bold',
+    color: theme.success
   },
   scanResultsChartData: {
-    backgroundColor: theme.success,
-    width: "78%",
+/*     backgroundColor: theme.success,
+    width: "84%",
     paddingVertical: 10,
     color: "white",
-    paddingLeft: 16
+    paddingLeft: 16 */
   }
 });

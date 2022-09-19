@@ -1,3 +1,4 @@
+
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import baseStyles from "../theme/base";
@@ -15,6 +16,7 @@ export default class HomeScreen extends React.Component {
   componentDidMount() {
     
   }
+
 
   render() {
     return (
