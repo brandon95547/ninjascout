@@ -9,7 +9,7 @@ export default class Tabs extends React.Component {
       <View style={{...tabsStyles.tabsWrap, ...baseStyles.mt3}}>
         <View style={{...tabsStyles.tab}}>
           <Text style={{...tabsStyles.tabText}}>Low</Text>
-          <Text style={{...tabsStyles.tabValue}}>$50</Text>
+          <Text style={{...tabsStyles.tabValue}}>${this.props.low}</Text>
         </View>
         <View style={{...tabsStyles.tab, ...baseStyles.backgroundWhite}}>
           <Text style={{...tabsStyles.tabText}}>Average</Text>

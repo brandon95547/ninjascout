@@ -19,10 +19,10 @@ ScreenOrientation.lockAsync(2)
 
 export default class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       fontsLoaded: false,
-    };
+    }
   }
 
   // using arrow functions keeps scope for this, lifecycle methods have scope to this by default

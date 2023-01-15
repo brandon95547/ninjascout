@@ -1,15 +1,14 @@
-import { Text, View, ScrollView, Image, KeyboardAvoidingView, TextInput } from "react-native";
-import { theme } from "../theme/variables"
-import Toast from 'react-native-root-toast';
-import axios from 'axios';
-import ScanResults from "../components/scanResults";
-import ScanResultsChart from "../components/scanResultsChart";
-import ScanForm from "../components/scanForm";
-import React from "react";
-import baseStyles from "../theme/base";
-import Constants from 'expo-constants';
-import scanResultsStyles from "../theme/components/scanResults";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Text, View, ScrollView, Image, KeyboardAvoidingView, TextInput } from "react-native"
+import axios from 'axios'
+import ScanResults from "../components/scanResults"
+import ScanResultsChart from "../components/scanResultsChart"
+import ScanForm from "../components/scanForm"
+import React from "react"
+import baseStyles from "../theme/base"
+import Constants from 'expo-constants'
+import scanResultsStyles from "../theme/components/scanResults"
+import Ionicons from "@expo/vector-icons/Ionicons"
+import { Utilities } from "../utilities";
 
 export default class Scan extends React.Component {
   state = {
@@ -17,7 +16,20 @@ export default class Scan extends React.Component {
     apiEndpoint: Constants.manifest.extra.apiEndpoint,
     isLoading: false,
     apiKey: Constants.manifest.extra.apiKey,
-    items: []
+    items: [],
+    lowSoldValue: 0
+  }
+
+  componentDidMount() {
+    this.utilities = new Utilities
+  }
+
+  getLowSoldValue(rows) {
+    const items = []
+    rows.forEach(item => {
+      items.push(Number(item.ebay_sales_price))
+    })
+    return Math.min.apply(Math, items)
   }
 
   scan = (item) => {
@@ -29,21 +41,22 @@ export default class Scan extends React.Component {
         }
       })
       .then(response => {
-        // console.log('response data', response.data);
-        this.setState({ items: response.data.row })
+        const salesData = {
+          items: response.data.sales,
+        }
+        this.setState({ items: salesData.items.slice(0, 25) })
+        this.setState({ lowSoldValue: this.getLowSoldValue(salesData.items) })
+        this.utilities.playSound('success')
       })
-        .catch(function (err) {
-        console.log(err)
+      .catch(err => {
+        this.utilities.showToast(err.message)
       })
         this.setState({ isLoading: false })
     } else {
-      Toast.show('Please key enter or scan an item first.', {
-        duration: Toast.durations.LONG,
-        backgroundColor: theme.complimentary
-      });
-      setTimeout(() => {
-        this.setState({ isLoading: false })
-      }, 3000)
+        this.utilities.showToast('Please key enter or scan an item first.')
+        setTimeout(() => {
+          this.setState({ isLoading: false })
+        }, 3000)
     }
   }
 
@@ -55,16 +68,12 @@ export default class Scan extends React.Component {
       <ScrollView contentContainerStyle={{...baseStyles.container}}>
         <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
           <View style={baseStyles.grow}>
-            <ScanResults />
+            <ScanResults low={this.state.lowSoldValue} />
             {scanResultsChart}
-            {/* <View style={{...scanResultsStyles.scanResultWrap, ...baseStyles.mt2, ...baseStyles.mb3}}>
-              <Ionicons name="md-checkmark-circle" size={32} color={theme.success} />
-              <Text style={{...scanResultsStyles.scanResultPass, ...baseStyles.ml_3}}>Pass!</Text>
-            </View> */}
           </View>
           <ScanForm scan={this.scan} email="testing@gmail.com" />
         </KeyboardAvoidingView>
       </ScrollView>
-    );
+    )
   }
 }

@@ -12,7 +12,7 @@ export default class ScanResults extends React.Component {
       <View style={{ ...scanResultsStyles.scanResultsWrap }}>
         <Text style={{ ...scanResultsStyles.scanResultsText, ...baseStyles.text6, ...baseStyles.textBold }}>$65</Text>
         <Text style={{ ...scanResultsStyles.scanResultsText, ...baseStyles.text2 }}>Average Sell Price</Text>
-        <Tabs />
+        <Tabs low={this.props.low} />
       </View>
     );
   }

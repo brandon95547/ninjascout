@@ -6,10 +6,7 @@ import scanResultsChartStyles from "../theme/components/scanResultsChart";
 import base from "../theme/base";
 
 export default class ScanResultsChart extends React.Component {
-
-  
   render() { 
-
     if (this.props.items.length) {
       return (
         <ScrollView style={scanResultsChartStyles.scanResultsChartWrap}>

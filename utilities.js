@@ -1,5 +1,8 @@
-// import React from "react";
-import * as Font from "expo-font";
+// import React from "react"
+import * as Font from "expo-font"
+import Toast from 'react-native-root-toast'
+import { theme } from "./theme/variables"
+import { Audio } from 'expo-av'
 
 export class Utilities {
   async loadFonts(callback) {
@@ -17,12 +20,29 @@ export class Utilities {
         uri: require("./assets/fonts/Roboto-Light.ttf"),
         display: Font.FontDisplay.FALLBACK,
       },
-    });
-    callback();
+    })
+    callback()
   }
   validateEmail = (email) => {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-  };
+    )
+  }
+  showToast = (message) => {
+    Toast.show(message, {
+      duration: Toast.durations.LONG,
+      backgroundColor: theme.complimentary
+    })
+  }
+  playSound = async  (type) => {
+    switch (type) {
+      case 'success' :
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/success-48018.mp3' ))
+      break
+    }
+    if (sound) {
+      await Audio.setAudioModeAsync({ playsInSilentModeIOS: true })
+      await sound.playAsync()
+    }
+  }
 }
