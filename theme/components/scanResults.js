@@ -8,9 +8,6 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: theme.primary,
     paddingTop: 16,
-    paddingBottom: 34,
-    borderBottomRightRadius: 30,
-    borderBottomLeftRadius: 30,
   },
   averageSalePriceWrap: {
     display: "flex"

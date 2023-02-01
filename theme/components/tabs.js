@@ -6,8 +6,15 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-evenly",
-    backgroundColor: theme.light,
-    borderRadius: 18
+    width: "100%",
+    borderBottomWidth: 1,
+    borderBottomColor: theme.light3
+  },
+  light: {
+    backgroundColor: theme.light2,
+  },
+  dark: {
+    backgroundColor: theme.dark,
   },
   tab: {
     display: "flex",

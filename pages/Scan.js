@@ -117,7 +117,6 @@ export default class Scan extends React.Component {
       <ScrollView contentContainerStyle={{...baseStyles.container}}>
         <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
           <View style={baseStyles.grow}>
-            <Text>{this.state.isLoading ? '1' : '2'}</Text>
             <ScanResults low={this.state.lowSoldValue} high={this.state.highSoldValue} avg={this.state.avgSoldValue} />
             {scanResultsChart}
           </View>
