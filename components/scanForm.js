@@ -7,6 +7,11 @@ import scanFormStyles from "../theme/components/scanForm"
 export default class ScanForm extends React.Component {
   state = { scanItem: '' }
 
+  searchFilters = (keyword) => {
+    keyword = keyword.replace('shirts', 'shirt')
+    return keyword
+  }
+
   render() { 
     const isSubmitDisabled = this.props.isLoading || this.state.scanItem.length <= 3
     return (
@@ -19,7 +24,7 @@ export default class ScanForm extends React.Component {
             onChangeText={(scanItem) => this.setState({scanItem: scanItem})}
             value={this.state.scanItem}
           />
-          <TouchableOpacity disabled={isSubmitDisabled} style={[scanFormStyles.scanButton, isSubmitDisabled && scanFormStyles.disabled]} onPress={() => this.props.scan(this.state.scanItem)}>
+          <TouchableOpacity disabled={isSubmitDisabled} style={[scanFormStyles.scanButton, isSubmitDisabled && scanFormStyles.disabled]} onPress={() => this.props.scan(this.searchFilters(this.state.scanItem))}>
             <Text style={{...scanFormStyles.scanButtonText, ...baseStyles.text3, ...baseStyles.mr2}}>Scan</Text>
             <Ionicons name="md-scan" size={24} color="white" />
           </TouchableOpacity>

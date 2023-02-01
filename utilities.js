@@ -42,6 +42,9 @@ export class Utilities {
       case 'failure' :
         var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/483598__raclure__wrong.mp3' ))
       break
+      case 'brandon' :
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/brandonawesome.mp3' ))
+      break
     }
     if (sound) {
       await Audio.setAudioModeAsync({ playsInSilentModeIOS: true })

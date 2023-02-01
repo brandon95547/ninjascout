@@ -12,7 +12,7 @@ export default class ScanResultsChart extends React.Component {
   }
 
   render () { 
-    if (this.props.items.length > 0) {
+    if (this.props.items && this.props.items.length > 0) {
       return (
         <ScrollView style={scanResultsChartStyles.scanResultsChartWrap}>
           {this.props.items.map((element, i) => {

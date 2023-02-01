@@ -12,6 +12,9 @@ export default StyleSheet.create({
     borderBottomRightRadius: 30,
     borderBottomLeftRadius: 30,
   },
+  averageSalePriceWrap: {
+    display: "flex"
+  },
   scanResultsText: {
     color: "white",
     fontSize: theme.text2

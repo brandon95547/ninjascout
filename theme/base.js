@@ -243,5 +243,8 @@ export default StyleSheet.create({
   },
   colorLight2: {
     color: theme.light2
+  },
+  colorGold: {
+    color: theme.gold
   }
 });
