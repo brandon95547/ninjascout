@@ -21,5 +21,6 @@ export const theme = {
   text4: 24,
   text5: 30,
   text6: 36,
-  text7: 42
+  text7: 42,
+  
 }

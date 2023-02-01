@@ -34,6 +34,9 @@ export default StyleSheet.create({
     padding: 16,
     borderRadius: 28,
   },
+  disabled: {
+    opacity: .3,
+  },
   scanButtonText: {
     color: "white",
     fontWeight: "bold"

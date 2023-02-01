@@ -37,7 +37,10 @@ export class Utilities {
   playSound = async  (type) => {
     switch (type) {
       case 'success' :
-        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/success-48018.mp3' ))
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/beep3-98810.mp3' ))
+      break
+      case 'failure' :
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/483598__raclure__wrong.mp3' ))
       break
     }
     if (sound) {

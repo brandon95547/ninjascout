@@ -13,11 +13,11 @@ export default class Tabs extends React.Component {
         </View>
         <View style={{...tabsStyles.tab, ...baseStyles.backgroundWhite}}>
           <Text style={{...tabsStyles.tabText}}>Average</Text>
-          <Text style={{...tabsStyles.tabValue, ...baseStyles.colorSuccess}}>$65</Text>
+          <Text style={{...tabsStyles.tabValue, ...baseStyles.colorSuccess}}>${this.props.avg}</Text>
         </View>
         <View style={{...tabsStyles.tab}}>
           <Text style={{...tabsStyles.tabText}}>High</Text>
-          <Text style={{...tabsStyles.tabValue}}>$79</Text>
+          <Text style={{...tabsStyles.tabValue}}>${this.props.high}</Text>
         </View>
       </View>
     );

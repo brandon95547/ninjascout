@@ -21,7 +21,7 @@ export default StyleSheet.create({
   },
   tabValue: {
     color: theme.primary,
-    fontSize: theme.text4,
+    fontSize: theme.text3,
     fontWeight: "bold"
   }
 });
