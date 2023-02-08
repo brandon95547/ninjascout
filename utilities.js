@@ -36,14 +36,17 @@ export class Utilities {
   }
   playSound = async  (type) => {
     switch (type) {
+      case 'fire' :
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/friend-request-14878.mp3' ))
+      break
       case 'success' :
         var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/beep3-98810.mp3' ))
       break
       case 'failure' :
         var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/483598__raclure__wrong.mp3' ))
       break
-      case 'brandon' :
-        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/brandonawesome.mp3' ))
+      case 'normal' :
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/short-beep-tone-47916.mp3' ))
       break
     }
     if (sound) {

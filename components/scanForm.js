@@ -22,6 +22,7 @@ export default class ScanForm extends React.Component {
             placeholderTextColor="#444"
             autoCapitalize="none"
             onChangeText={(scanItem) => this.setState({scanItem: scanItem})}
+            autoCorrect={false}
             value={this.state.scanItem}
           />
           <TouchableOpacity disabled={isSubmitDisabled} style={[scanFormStyles.scanButton, isSubmitDisabled && scanFormStyles.disabled]} onPress={() => this.props.scan(this.searchFilters(this.state.scanItem))}>

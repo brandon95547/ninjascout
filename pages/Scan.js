@@ -7,7 +7,6 @@ import React from "react"
 import baseStyles from "../theme/base"
 import Constants from 'expo-constants'
 import scanResultsStyles from "../theme/components/scanResults"
-import Ionicons from "@expo/vector-icons/Ionicons"
 import { Utilities } from "../utilities";
 
 export default class Scan extends React.Component {
@@ -16,11 +15,15 @@ export default class Scan extends React.Component {
     apiEndpoint: Constants.manifest.extra.apiEndpoint,
     isLoading: false,
     apiKey: Constants.manifest.extra.apiKey,
+    totalItems: [],
     items: null,
     lowSoldValue: 0,
     highSoldValue: 0,
     avgSoldValue: 0,
-    rank: 0
+    rank: 0,
+    profit: 0,
+    theme: 'normal',
+    successLabel: 'Status'
   }
 
   componentDidMount() {
@@ -50,30 +53,41 @@ export default class Scan extends React.Component {
       items.push(Number(item.ebay_sales_price))
       total += Number(item.ebay_sales_price)
     })
-    console.log('count', items.length)
     var avg = total / items.length
     return items.length ? avg.toFixed(2) : 0
   }
 
+  getTotalItems() {
+    return this.state.totalItems.length
+  }
+
+  getProfit() {
+    const cost = 6
+    const finalValueFee = this.state.avgSoldValue * .1209
+    const listingFee = .30
+    return this.state.avgSoldValue ? (this.state.avgSoldValue - 6 - finalValueFee - listingFee).toFixed(2) : 0
+  }
+
   getRank() {
     let rank = 0
-    const lowSoldValue = this.state.lowSoldValue
-    if (lowSoldValue >= 19) {
-      rank = 1
-    } else if (lowSoldValue >= 25) {
-      rank = 2
-    } else if (lowSoldValue >= 30) {
-      rank = 3
-    } else if (lowSoldValue >= 40) {
-      rank = 4
-    } else if (lowSoldValue >= 50) {
-      rank = 5
-    } else if (lowSoldValue >= 60) {
-      rank = 6
-    } else if (lowSoldValue >= 70) {
-      rank = 7
-    } else if (lowSoldValue >= 80) {
-      rank = 8
+    const avgSoldValue = this.state.avgSoldValue
+    const totalItems = this.getTotalItems()
+    switch (true) {
+      case avgSoldValue >= 65 && totalItems >= 12 :
+        rank = 5
+        break
+      case avgSoldValue >= 50 && totalItems >= 8 :
+        rank = 4
+        break
+      case avgSoldValue >= 35 && totalItems >= 4 :
+        rank = 3
+        break
+      case avgSoldValue >= 20 && totalItems >= 3 :
+        rank = 2
+        break
+      case avgSoldValue >= 15 && totalItems >= 1 :
+        rank = 1
+        break
     }
     return rank
   }
@@ -91,12 +105,45 @@ export default class Scan extends React.Component {
           items: response.data.sales,
         }
         this.setState({ items: salesData.items.slice(0, 50) })
+        this.setState({ totalItems: salesData.items })
         this.setState({ lowSoldValue: this.getLowSoldValue(salesData.items) })
         this.setState({ highSoldValue: this.getHighSoldValue(salesData.items) })
         this.setState({ avgSoldValue: this.getAverageValue(salesData.items) })
         this.setState({ rank: this.getRank()})
+        this.setState({ profit: this.getProfit()})
         this.setState({ isLoading: false })
-        this.utilities.playSound('success')
+
+        switch(this.getRank()) {
+          case 1 :
+            this.utilities.playSound('normal')
+            this.setState({ theme: 'normal' })
+            this.setState({ successLabel: 'Common' })
+            break
+          case 2 :
+            this.utilities.playSound('success')
+            this.setState({ theme: 'success' })
+            this.setState({ successLabel: 'Success' })
+            break
+          case 3 :
+            this.utilities.playSound('success')
+            this.setState({ theme: 'success' })
+            this.setState({ successLabel: 'Success' })
+            break
+          case 4 :
+            this.utilities.playSound('fire')
+            this.setState({ theme: 'fire' })
+            this.setState({ successLabel: 'FIRE ' })
+            break
+          case 5 :
+            this.utilities.playSound('fire')
+            this.setState({ theme: 'fire' })
+            this.setState({ successLabel: 'FIRE' })
+            break
+          default :
+            this.utilities.playSound('failure')
+            this.setState({ theme: 'failure' })
+            this.setState({ successLabel: 'FAILURE' })
+        }
       })
       .catch(err => {
         this.utilities.showToast(err.message)
@@ -113,11 +160,39 @@ export default class Scan extends React.Component {
   render() {
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 60
     const scanResultsChart = <ScanResultsChart items={this.state.items} />
+    let tabsDataTop = {
+      col1: {
+        label: 'Profit',
+        value: `$${this.state.profit}`
+      },
+      col2: {
+        label: this.state.successLabel,
+        value: ''
+      },
+      col3: {
+        label: 'Rank',
+        value: `${this.state.rank}`
+      }
+    }
+    let tabsDataBottom = {
+      col1: {
+        label: 'Low',
+        value: `$${this.state.lowSoldValue}`
+      },
+      col2: {
+        label: 'Average',
+        value: `$${this.state.avgSoldValue}`
+      },
+      col3: {
+        label: 'High',
+        value: `$${this.state.highSoldValue}`
+      }
+    }
     return (
       <ScrollView contentContainerStyle={{...baseStyles.container}}>
         <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
           <View style={baseStyles.grow}>
-            <ScanResults low={this.state.lowSoldValue} high={this.state.highSoldValue} avg={this.state.avgSoldValue} />
+            <ScanResults theme={this.state.theme} tabsDataTop={tabsDataTop} tabsDataBottom={tabsDataBottom} />
             {scanResultsChart}
           </View>
           <ScanForm scan={this.scan} isLoading={this.state.isLoading} />

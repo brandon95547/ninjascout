@@ -32,7 +32,7 @@ export default class ScanResultsChart extends React.Component {
     } else if (this.props.items === null) {
       return <View style={{ ...scanResultsChartStyles.directions, ...baseStyles.mt3 }}><Text style={{ ...scanResultsChartStyles.directionsText }}>Please key enter or scan an item below:</Text></View>
     } else {
-      return <View style={{ ...scanResultsChartStyles.directions, ...baseStyles.mt3 }}><Text style={{ ...scanResultsChartStyles.directionsText }}>There are no results for your search:</Text></View>
+      return <View style={[scanResultsChartStyles.directions, baseStyles.mt3]}><Text style={[scanResultsChartStyles.directionsText, baseStyles.colorComplimentary]}>There are no results for your search:</Text></View>
     }
   }
 }

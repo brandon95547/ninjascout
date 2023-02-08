@@ -8,23 +8,31 @@ export default StyleSheet.create({
     justifyContent: "space-evenly",
     width: "100%",
     borderBottomWidth: 1,
-    borderBottomColor: theme.light3
   },
-  light: {
-    backgroundColor: theme.light2,
+  success: {
+    backgroundColor: theme.successLight,
   },
   dark: {
     backgroundColor: theme.dark,
+  },
+  fire: {
+    backgroundColor: theme.fire
+  },
+  normal: {
+    backgroundColor: theme.blue
+  },
+  failure: {
+    backgroundColor: theme.error
+  },
+  fireText: {
+    color: theme.prominent
   },
   tab: {
     display: "flex",
     alignItems: "center",
     paddingVertical: 8,
     paddingHorizontal: 26,
-  },
-  tabText: {
-    color: theme.primary,
-    fontSize: theme.text2,
+    justifyContent: "center"
   },
   tabValue: {
     color: theme.primary,

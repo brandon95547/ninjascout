@@ -9,6 +9,10 @@ export default StyleSheet.create({
     flex: 1,
     width: "100%"
   },
+  flexH: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
   grow: {
     flexGrow: 1
   },
@@ -85,6 +89,9 @@ export default StyleSheet.create({
   ml_3: {
     marginLeft: 3
   },
+  ml1a: {
+    marginLeft: 4
+  },
   ml1: {
     marginLeft: 8
   },
@@ -96,6 +103,9 @@ export default StyleSheet.create({
   },
   mr_3: {
     marginRight: 3
+  },
+  mr1a: {
+    marginRight: 4
   },
   mr1: {
     marginRight: 8
@@ -246,5 +256,17 @@ export default StyleSheet.create({
   },
   colorGold: {
     color: theme.gold
+  },
+  colorDark: {
+    color: theme.dark
+  },
+  colorBlack: {
+    color: theme.black
+  },
+  colorComplimentary: {
+    color: theme.complimentary
+  },
+  colorYellow: {
+    color: theme.yellow
   }
 });

@@ -7,7 +7,6 @@ export default StyleSheet.create({
     width: "100%",
     alignItems: "center",
     backgroundColor: theme.primary,
-    paddingTop: 16,
   },
   averageSalePriceWrap: {
     display: "flex"
