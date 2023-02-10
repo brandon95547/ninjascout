@@ -65,7 +65,7 @@ export default class Scan extends React.Component {
     const cost = 6
     const finalValueFee = this.state.avgSoldValue * .1209
     const listingFee = .30
-    return this.state.avgSoldValue ? (this.state.avgSoldValue - 6 - finalValueFee - listingFee).toFixed(2) : 0
+    return this.state.avgSoldValue ? (this.state.avgSoldValue - cost - finalValueFee - listingFee).toFixed(2) : 0
   }
 
   getRank() {
@@ -109,8 +109,8 @@ export default class Scan extends React.Component {
         this.setState({ lowSoldValue: this.getLowSoldValue(salesData.items) })
         this.setState({ highSoldValue: this.getHighSoldValue(salesData.items) })
         this.setState({ avgSoldValue: this.getAverageValue(salesData.items) })
-        this.setState({ rank: this.getRank()})
         this.setState({ profit: this.getProfit()})
+        this.setState({ rank: this.getRank()})
         this.setState({ isLoading: false })
 
         switch(this.getRank()) {
@@ -130,9 +130,9 @@ export default class Scan extends React.Component {
             this.setState({ successLabel: 'Success' })
             break
           case 4 :
-            this.utilities.playSound('fire')
-            this.setState({ theme: 'fire' })
-            this.setState({ successLabel: 'FIRE ' })
+            this.utilities.playSound('success')
+            this.setState({ theme: 'success' })
+            this.setState({ successLabel: 'Success' })
             break
           case 5 :
             this.utilities.playSound('fire')

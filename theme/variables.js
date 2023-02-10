@@ -5,7 +5,7 @@ export const theme = {
   complimentary: '#D02828',
   prominent: '#df9020',
   fire: '#FB7C3B',
-  success: '#1e8834',
+  success: '#19742c',
   successLight: '#3FB163',
   teal: '#1694a5',
   hot: '#fd4202',
