@@ -23,14 +23,15 @@ export default class ScanResultsChart extends React.Component {
           {this.props.items.map((element, i) => {
             const title = element.ebay_sales_title
             const price = `$${Math.trunc(element.ebay_sales_price)}`
-            const image = this.state.apiEndpoint + '/' + element.ebay_sales_image
+            const imageSrc = element.ebay_sales_image || 'wlgAAOSwxs9jyv6o,s-l225.webps-l225.webp'
+            const image = this.state.apiEndpoint + '/' + imageSrc
             return <View key={i} style={{ ...baseStyles.mt4 }}>
               <View style={{ ...scanResultsChartStyles.scanResultsChartInner }}>
                 <View style={{ ...scanResultsChartStyles.scanResultsChartRow }}>
                   <Text style={{ ...scanResultsChartStyles.scanResultsChartLabel }}>{this.filterTitle(title)}</Text>
                   <Text style={{ ...scanResultsChartStyles.scanResultsChartPrice }}>{price}</Text>
                 </View>
-                <Image style={scanResultsChartStyles.image} source={{url: image}} resizeMode='contain' />
+                <Image style={scanResultsChartStyles.image} source={{uri: image}} resizeMode='contain' />
               </View>
             </View>
           })}

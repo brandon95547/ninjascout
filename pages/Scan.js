@@ -15,7 +15,6 @@ export default class Scan extends React.Component {
     apiEndpoint: Constants.manifest.extra.apiEndpoint,
     isLoading: false,
     apiKey: Constants.manifest.extra.apiKey,
-    totalItems: [],
     items: null,
     lowSoldValue: 0,
     highSoldValue: 0,
@@ -30,66 +29,11 @@ export default class Scan extends React.Component {
     this.utilities = new Utilities
   }
 
-  getLowSoldValue(rows) {
-    const items = []
-    rows.forEach(item => {
-      items.push(Number(item.ebay_sales_price))
-    })
-    return items.length ? Math.min.apply(Math, items).toFixed(2) : 0
-  }
-
-  getHighSoldValue(rows) {
-    const items = []
-    rows.forEach(item => {
-      items.push(Number(item.ebay_sales_price))
-    })
-    return items.length ? Math.max.apply(Math, items).toFixed(2) : 0
-  }
-
-  getAverageValue(rows) {
-    var total = 0
-    const items = []
-    rows.forEach(item => {
-      items.push(Number(item.ebay_sales_price))
-      total += Number(item.ebay_sales_price)
-    })
-    var avg = total / items.length
-    return items.length ? avg.toFixed(2) : 0
-  }
-
-  getTotalItems() {
-    return this.state.totalItems.length
-  }
-
   getProfit() {
     const cost = 6
     const finalValueFee = this.state.avgSoldValue * .1209
     const listingFee = .30
     return this.state.avgSoldValue ? (this.state.avgSoldValue - cost - finalValueFee - listingFee).toFixed(2) : 0
-  }
-
-  getRank() {
-    let rank = 0
-    const avgSoldValue = this.state.avgSoldValue
-    const totalItems = this.getTotalItems()
-    switch (true) {
-      case avgSoldValue >= 65 && totalItems >= 12 :
-        rank = 5
-        break
-      case avgSoldValue >= 50 && totalItems >= 8 :
-        rank = 4
-        break
-      case avgSoldValue >= 35 && totalItems >= 4 :
-        rank = 3
-        break
-      case avgSoldValue >= 20 && totalItems >= 3 :
-        rank = 2
-        break
-      case avgSoldValue >= 15 && totalItems >= 1 :
-        rank = 1
-        break
-    }
-    return rank
   }
 
   scan = (item) => {
@@ -100,20 +44,20 @@ export default class Scan extends React.Component {
           keyword: item.toLowerCase()
         }
       })
-      .then(response => {
+      .then(async response => {
         const salesData = {
           items: response.data.sales,
         }
+        // const rank = 5
         this.setState({ items: salesData.items.slice(0, 50) })
-        this.setState({ totalItems: salesData.items })
-        this.setState({ lowSoldValue: this.getLowSoldValue(salesData.items) })
-        this.setState({ highSoldValue: this.getHighSoldValue(salesData.items) })
-        this.setState({ avgSoldValue: this.getAverageValue(salesData.items) })
+        this.setState({ lowSoldValue: response.data.lowPrice })
+        this.setState({ highSoldValue: response.data.highPrice })
+        this.setState({ avgSoldValue: response.data.averagePrice })
         this.setState({ profit: this.getProfit()})
-        this.setState({ rank: this.getRank()})
+        this.setState({ rank: response.data.rank })
         this.setState({ isLoading: false })
 
-        switch(this.getRank()) {
+        switch(rank) {
           case 1 :
             this.utilities.playSound('normal')
             this.setState({ theme: 'normal' })
@@ -158,6 +102,7 @@ export default class Scan extends React.Component {
   }
 
   render() {
+    console.log('dis render')
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 60
     const scanResultsChart = <ScanResultsChart items={this.state.items} />
     let tabsDataTop = {
@@ -191,7 +136,7 @@ export default class Scan extends React.Component {
     return (
       <ScrollView contentContainerStyle={{...baseStyles.container}}>
         <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
-          <View style={baseStyles.grow}>
+          <View style={[baseStyles.grow, baseStyles.pb4]}>
             <ScanResults theme={this.state.theme} tabsDataTop={tabsDataTop} tabsDataBottom={tabsDataBottom} />
             {scanResultsChart}
           </View>

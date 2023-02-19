@@ -8,8 +8,18 @@ export default class ScanForm extends React.Component {
   state = { scanItem: '' }
 
   searchFilters = (keyword) => {
-    keyword = keyword.replace('shirts', 'shirt')
+    // these normalization filters must match the ones on the cron job backend
+    keyword = keyword.replace(' sneakers', ' shoes')
+    keyword = keyword.replace(' sneaker', ' shoes')
+    // we don't want to convert boots to bootss
+    if (!keyword.includes('boots')) {
+      keyword = keyword.replace(' boot', ' boots')
+    }
     return keyword
+  }
+
+  scan = () => {
+    this.props.scan(this.searchFilters(this.state.scanItem))
   }
 
   render() { 
@@ -23,9 +33,10 @@ export default class ScanForm extends React.Component {
             autoCapitalize="none"
             onChangeText={(scanItem) => this.setState({scanItem: scanItem})}
             autoCorrect={false}
+            onSubmitEditing={this.scan}
             value={this.state.scanItem}
           />
-          <TouchableOpacity disabled={isSubmitDisabled} style={[scanFormStyles.scanButton, isSubmitDisabled && scanFormStyles.disabled]} onPress={() => this.props.scan(this.searchFilters(this.state.scanItem))}>
+          <TouchableOpacity disabled={isSubmitDisabled} style={[scanFormStyles.scanButton, isSubmitDisabled && scanFormStyles.disabled]} onPress={this.scan}>
             <Text style={{...scanFormStyles.scanButtonText, ...baseStyles.text3, ...baseStyles.mr2}}>Scan</Text>
             <Ionicons name="md-scan" size={24} color="white" />
           </TouchableOpacity>

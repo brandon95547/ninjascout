@@ -117,6 +117,18 @@ export default StyleSheet.create({
     marginRight: 24
   },
   /* PADDING */
+  pb1: {
+    paddingBottom: 8
+  },
+  pb2: {
+    paddingBottom: 16
+  },
+  pb3: {
+    paddingBottom: 24
+  },
+  pb4: {
+    paddingBottom: 36
+  },
   ph1: {
     paddingHorizontal: 8
   },

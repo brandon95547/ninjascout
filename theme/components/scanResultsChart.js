@@ -8,7 +8,7 @@ const windowHeight = Dimensions.get("window").height;
 export default StyleSheet.create({
   scanResultsChartWrap: {
     height: '20%',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   directions: {
     alignItems: 'center'
