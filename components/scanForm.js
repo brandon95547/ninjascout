@@ -11,6 +11,8 @@ export default class ScanForm extends React.Component {
     // these normalization filters must match the ones on the cron job backend
     keyword = keyword.replace(' sneakers', ' shoes')
     keyword = keyword.replace(' sneaker', ' shoes')
+    keyword = keyword.replace(' vtg', ' vintage')
+    keyword = keyword.replace('salamon', 'salomon')
     // we don't want to convert boots to bootss
     if (!keyword.includes('boots')) {
       keyword = keyword.replace(' boot', ' boots')

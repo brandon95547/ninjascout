@@ -22,7 +22,8 @@ export default class Scan extends React.Component {
     rank: 0,
     profit: 0,
     theme: 'normal',
-    successLabel: 'Status'
+    successLabel: 'Status',
+    totalItems: 0
   }
 
   componentDidMount() {
@@ -48,7 +49,6 @@ export default class Scan extends React.Component {
         const salesData = {
           items: response.data.sales,
         }
-        // const rank = 5
         this.setState({ items: salesData.items.slice(0, 50) })
         this.setState({ lowSoldValue: response.data.lowPrice })
         this.setState({ highSoldValue: response.data.highPrice })
@@ -56,8 +56,9 @@ export default class Scan extends React.Component {
         this.setState({ profit: this.getProfit()})
         this.setState({ rank: response.data.rank })
         this.setState({ isLoading: false })
+        this.setState({ totalItems: salesData.items.length })
 
-        switch(rank) {
+        switch(this.state.rank) {
           case 1 :
             this.utilities.playSound('normal')
             this.setState({ theme: 'normal' })
@@ -86,7 +87,7 @@ export default class Scan extends React.Component {
           default :
             this.utilities.playSound('failure')
             this.setState({ theme: 'failure' })
-            this.setState({ successLabel: 'FAILURE' })
+            this.setState({ successLabel: 'NO GOOD' })
         }
       })
       .catch(err => {
@@ -102,7 +103,6 @@ export default class Scan extends React.Component {
   }
 
   render() {
-    console.log('dis render')
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 90 : 60
     const scanResultsChart = <ScanResultsChart items={this.state.items} />
     let tabsDataTop = {
@@ -138,6 +138,7 @@ export default class Scan extends React.Component {
         <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
           <View style={[baseStyles.grow, baseStyles.pb4]}>
             <ScanResults theme={this.state.theme} tabsDataTop={tabsDataTop} tabsDataBottom={tabsDataBottom} />
+            <Text>{this.state.totalItems}</Text>
             {scanResultsChart}
           </View>
           <ScanForm scan={this.scan} isLoading={this.state.isLoading} />
