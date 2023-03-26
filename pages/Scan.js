@@ -30,13 +30,6 @@ export default class Scan extends React.Component {
     this.utilities = new Utilities
   }
 
-  getProfit() {
-    const cost = 6
-    const finalValueFee = this.state.avgSoldValue * .1209
-    const listingFee = .30
-    return this.state.avgSoldValue ? (this.state.avgSoldValue - cost - finalValueFee - listingFee).toFixed(2) : 0
-  }
-
   scan = (item) => {
     this.setState({ isLoading: true })
     if (item) {
@@ -53,7 +46,7 @@ export default class Scan extends React.Component {
         this.setState({ lowSoldValue: response.data.lowPrice })
         this.setState({ highSoldValue: response.data.highPrice })
         this.setState({ avgSoldValue: response.data.averagePrice })
-        this.setState({ profit: this.getProfit()})
+        this.setState({ profit: response.data.profit })
         this.setState({ rank: response.data.rank })
         this.setState({ isLoading: false })
         this.setState({ totalItems: salesData.items.length })

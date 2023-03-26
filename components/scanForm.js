@@ -12,12 +12,18 @@ export default class ScanForm extends React.Component {
     keyword = keyword.replace(' sneakers', ' shoes')
     keyword = keyword.replace(' sneaker', ' shoes')
     keyword = keyword.replace(' vtg', ' vintage')
+    keyword = keyword.replace(' bros', ' brothers')
+    keyword = keyword.replace('vtg ', 'vintage ')
     keyword = keyword.replace('salamon', 'salomon')
+    keyword = keyword.replace('-', ' ')
     // we don't want to convert boots to bootss
     if (!keyword.includes('boots')) {
       keyword = keyword.replace(' boot', ' boots')
     }
-    return keyword
+    if (!keyword.includes('cabelas')) {
+      keyword = keyword.replace('cabela', 'cabelas')
+    }
+    return keyword.trim()
   }
 
   scan = () => {

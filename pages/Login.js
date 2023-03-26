@@ -11,7 +11,7 @@ import { Utilities } from "../utilities";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class CreateAccount extends React.Component {
-  state = { nick: '', email: '', password: '', isLoading: false, apiEndpoint: Constants.manifest.extra.apiEndpoint, apiKey: Constants.manifest.extra.apiKey, utilities: null }
+  state = { email: '', password: '', isLoading: false, apiEndpoint: Constants.manifest.extra.apiEndpoint, apiKey: Constants.manifest.extra.apiKey, utilities: null }
 
   // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
   async componentDidMount() {
@@ -23,10 +23,9 @@ export default class CreateAccount extends React.Component {
   signUp = () => {
     this.setState({ isLoading: true })
     if (this.utilities.validateEmail(this.state.email) && this.state.password) {
-      axios.post(`${this.state.apiEndpoint}/createAccount`, {
+      axios.post(`${this.state.apiEndpoint}/login`, {
         email: this.state.email,
-        password: this.state.password,
-        nick: this.state.nick
+        password: this.state.password
       })
         .then(response => {
           console.log(response.data)
@@ -39,14 +38,13 @@ export default class CreateAccount extends React.Component {
             Toast.show(response.data.message, {
               duration: Toast.durations.LONG,
               backgroundColor: theme.success,
-              onHide: () => {
-                AsyncStorage.setItem('user', JSON.stringify({
-                  nick: this.state.nick,
-                  email: this.state.email,
-                  password: this.state.password
-                }))
+              onShown: () => {
                 this.props.navigation.navigate('Dashboard')
               },
+            })
+            AsyncStorage.setItem('user', {
+              email: this.state.email,
+              password: this.state.password
             })
           }
           this.setState({ isLoading: false })
@@ -59,7 +57,7 @@ export default class CreateAccount extends React.Component {
         this.setState({ isLoading: false })
       });
     } else {
-      Toast.show('A valid nickname, email and password are required.', {
+      Toast.show('A valid email and password are required.', {
         duration: Toast.durations.LONG,
         backgroundColor: theme.complimentary
       });
@@ -90,14 +88,6 @@ export default class CreateAccount extends React.Component {
         <View style={createAccountStyles.inputWrap}>
           <TextInput
             style={styles.input}
-            placeholder="Nickname"
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            onChangeText={(nick) => this.setState({nick: nick})}
-            value={this.state.nick}
-          />
-          <TextInput
-            style={[styles.input, styles.mt2]}
             placeholder="Email"
             placeholderTextColor="white"
             autoCapitalize="none"
@@ -128,7 +118,6 @@ export default class CreateAccount extends React.Component {
            {signInButton()}
           </TouchableOpacity>
           <Text style={{ ...styles.mt3, ...styles.textLink }}>Forgot Password?</Text>
-          <Text onPress={() => this.props.navigation.navigate('Login')}style={{ ...styles.mt3, ...styles.textLink }}>Already have an account, Login</Text>
         </View>
       </ScrollView>
     );
