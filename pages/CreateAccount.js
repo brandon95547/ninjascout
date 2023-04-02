@@ -17,7 +17,7 @@ export default class CreateAccount extends React.Component {
   async componentDidMount() {
     this.utilities = new Utilities
     // this.props.navigation.navigate('Dashboard')
-    console.log(await AsyncStorage.getItem('user'))
+    // console.log(await AsyncStorage.getItem('user'))
   }
 
   signUp = () => {
@@ -78,7 +78,7 @@ export default class CreateAccount extends React.Component {
         )
       } else {
         return (
-          <Text style={{ ...styles.cDark, ...styles.buttonText }}>SIGN IN</Text>
+          <Text style={{ ...styles.cDark, ...styles.buttonText }}>SIGN UP</Text>
         )
       }
     }
@@ -115,6 +115,7 @@ export default class CreateAccount extends React.Component {
             onChangeText={(password) => this.setState({password: password})}
             value={this.state.password}
             secureTextEntry={true}
+            onSubmitEditing={this.signUp}
           />
           <TouchableOpacity
             onPress={() => {this.signUp()}}
