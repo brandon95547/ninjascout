@@ -13,11 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export default class CreateAccount extends React.Component {
   state = { nick: '', email: '', password: '', isLoading: false, apiEndpoint: Constants.manifest.extra.apiEndpoint, apiKey: Constants.manifest.extra.apiKey, utilities: null }
 
-  // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
   async componentDidMount() {
     this.utilities = new Utilities
-    // this.props.navigation.navigate('Dashboard')
-    // console.log(await AsyncStorage.getItem('user'))
   }
 
   signUp = () => {
@@ -29,7 +26,6 @@ export default class CreateAccount extends React.Component {
         nick: this.state.nick
       })
         .then(response => {
-          console.log(response.data)
           if (!response.data.success) {
             Toast.show(response.data.message, {
               duration: Toast.durations.LONG,
@@ -41,9 +37,15 @@ export default class CreateAccount extends React.Component {
               backgroundColor: theme.success,
               onHide: () => {
                 AsyncStorage.setItem('user', JSON.stringify({
-                  nick: this.state.nick,
-                  email: this.state.email,
-                  password: this.state.password
+                  ebay_sales_user_nickname: this.state.nick,
+                  ebay_sales_user_email: this.state.email,
+                  ebay_sales_user_password: this.state.password,
+                  ebay_sales_user_level: 0,
+                  ebay_sales_user_scans: 0,
+                  ebay_sales_user_brands_scanned: 0,
+                  ebay_sales_user_treasure_found: 0,
+                  ebay_sales_user_treasure_success_rate: 0,
+                  active: 1
                 }))
                 this.props.navigation.navigate('Dashboard')
               },
@@ -128,7 +130,6 @@ export default class CreateAccount extends React.Component {
           >
            {signInButton()}
           </TouchableOpacity>
-          <Text style={{ ...styles.mt3, ...styles.textLink }}>Forgot Password?</Text>
           <Text onPress={() => this.props.navigation.navigate('Login')}style={{ ...styles.mt3, ...styles.textLink }}>Already have an account, Login</Text>
         </View>
       </ScrollView>

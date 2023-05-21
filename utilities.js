@@ -48,6 +48,9 @@ export class Utilities {
       case 'normal' :
         var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/short-beep-tone-47916.mp3' ))
       break
+      case 'levelUp' :
+        var { sound } = await Audio.Sound.createAsync( require('./assets/sounds/117899__sepal__levelup.wav' ))
+      break
     }
     if (sound) {
       await Audio.setAudioModeAsync({ playsInSilentModeIOS: true })

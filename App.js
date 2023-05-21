@@ -15,6 +15,7 @@ import HomeScreen from "./pages/HomeScreen"
 import CreateAccount from "./pages/CreateAccount"
 import Login from "./pages/Login"
 import Logoff from "./pages/Logoff"
+import Settings from "./pages/Settings"
 import Dashboard from "./pages/Dashboard"
 import Scan from "./pages/Scan"
 
@@ -48,17 +49,23 @@ export default class App extends React.Component {
 
   render() {
     const logoff = this.state.user ? <Drawer.Screen name="Logoff" component={Logoff} initialParams={{ fn: this.fn }} /> : <></>
+    const settings = this.state.user ? <Drawer.Screen name="Settings" component={Settings} /> : <></>
+    const create = !this.state.user ? <Drawer.Screen name="Create Account" component={CreateAccount} /> : <></>
+    const dashboard = this.state.user ? <Drawer.Screen name="Dashboard" component={Dashboard} /> : <></>
+    const login = !this.state.user ? <Drawer.Screen name="Login" component={Login} /> : <></>
+    const scan = this.state.user ? <Drawer.Screen name="Scan" component={Scan} /> : <></>
     if (this.state.fontsLoaded) {
       return (
         <RootSiblingParent>
           <NavigationContainer>
             <Drawer.Navigator initialRouteName="Home">
               <Drawer.Screen name="Home" component={HomeScreen} options={{ title: "Home" }} />
-              <Drawer.Screen name="Dashboard" component={Dashboard} />
-              <Drawer.Screen name="Create Account" component={CreateAccount} />
-              <Drawer.Screen name="Scan" component={Scan} />
+              {dashboard}
+              {create}
+              {scan}
+              {settings}
               {logoff}
-              <Drawer.Screen name="Login" component={Login} options={{ drawerItemStyle: { display: 'none' } }} />
+              {login}
             </Drawer.Navigator>
           </NavigationContainer>
         </RootSiblingParent>

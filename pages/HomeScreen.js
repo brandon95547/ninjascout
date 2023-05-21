@@ -16,7 +16,6 @@ export default class HomeScreen extends React.Component {
   }
 
   async componentDidMount() {
-    console.log('remounted')
     this.props.navigation.addListener('focus', async() => {
       const user = await AsyncStorage.getItem('user')
       this.setState({ user: JSON.parse(user) })

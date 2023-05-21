@@ -5,9 +5,11 @@ import ScanResultsChart from "../components/scanResultsChart"
 import ScanForm from "../components/scanForm"
 import React from "react"
 import baseStyles from "../theme/base"
+import scanStyles from "../theme/scan"
 import Constants from 'expo-constants'
 import scanResultsStyles from "../theme/components/scanResults"
-import { Utilities } from "../utilities";
+import { Utilities } from "../utilities"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default class Scan extends React.Component {
   state = {
@@ -23,11 +25,20 @@ export default class Scan extends React.Component {
     profit: 0,
     theme: 'normal',
     successLabel: 'Status',
-    totalItems: 0
+    totalItems: 0,
+    user: null,
+    showLevelUp: false
   }
 
   componentDidMount() {
     this.utilities = new Utilities
+    this.props.navigation.addListener('focus', async() => {
+      const user = await AsyncStorage.getItem('user')
+      this.setState({ user: JSON.parse(user) })
+      if (!user) {
+        this.props.navigation.navigate('Home')
+      }
+    })
   }
 
   scan = (item) => {
@@ -35,7 +46,8 @@ export default class Scan extends React.Component {
     if (item) {
       axios.get(`${this.state.apiEndpoint}/sales`, {
         params: {
-          keyword: item.toLowerCase()
+          keyword: item.toLowerCase(),
+          user: this.state.user
         }
       })
       .then(async response => {
@@ -50,6 +62,16 @@ export default class Scan extends React.Component {
         this.setState({ rank: response.data.rank })
         this.setState({ isLoading: false })
         this.setState({ totalItems: salesData.items.length })
+        AsyncStorage.setItem('user', JSON.stringify(response.data.user))
+
+        const scans = response.data.user.ebay_sales_user_scans
+        if (scans === 100 || scans === 500 || scans === 1000 || scans === 5000) {
+          this.setState({ showLevelUp: true })
+          setTimeout(() => {
+            this.setState({ showLevelUp: false })
+          }, 3500)
+          this.utilities.playSound('levelUp')
+        }
 
         switch(this.state.rank) {
           case 1 :
@@ -126,12 +148,15 @@ export default class Scan extends React.Component {
         value: `$${this.state.highSoldValue}`
       }
     }
+    const levelUpImg = this.state.showLevelUp ? <Image style={scanStyles.logo} source={require("../assets/img/f3ed8c_6efddf2a505f463689392146a9e43195~mv2.gif")} /> : <></>
     return (
       <ScrollView contentContainerStyle={{...baseStyles.container}}>
         <KeyboardAvoidingView style={baseStyles.keyboardInner} contentContainerStyle={baseStyles.keyboard} behavior='position' keyboardVerticalOffset={keyboardVerticalOffset}>
           <View style={[baseStyles.grow, baseStyles.pb4]}>
             <ScanResults theme={this.state.theme} tabsDataTop={tabsDataTop} tabsDataBottom={tabsDataBottom} />
-            <Text>{this.state.totalItems}</Text>
+            <View style={scanStyles.logoWrap}>
+              {levelUpImg}
+            </View>
             {scanResultsChart}
           </View>
           <ScanForm scan={this.scan} isLoading={this.state.isLoading} />

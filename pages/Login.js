@@ -16,11 +16,9 @@ export default class CreateAccount extends React.Component {
   // using arrow functions keeps scope for this, lifecycle methods have scope to this by default
   async componentDidMount() {
     this.utilities = new Utilities
-    // this.props.navigation.navigate('Dashboard')
-    console.log(await AsyncStorage.getItem('user'))
   }
 
-  signUp = () => {
+  login = () => {
     this.setState({ isLoading: true })
     if (this.utilities.validateEmail(this.state.email) && this.state.password) {
       axios.post(`${this.state.apiEndpoint}/login`, {
@@ -28,7 +26,6 @@ export default class CreateAccount extends React.Component {
         password: this.state.password
       })
         .then(response => {
-          console.log(response.data)
           if (!response.data.success) {
             Toast.show(response.data.message, {
               duration: Toast.durations.LONG,
@@ -39,12 +36,9 @@ export default class CreateAccount extends React.Component {
               duration: Toast.durations.LONG,
               backgroundColor: theme.success,
               onShown: () => {
+                AsyncStorage.setItem('user', JSON.stringify(response.data.user))
                 this.props.navigation.navigate('Dashboard')
               },
-            })
-            AsyncStorage.setItem('user', {
-              email: this.state.email,
-              password: this.state.password
             })
           }
           this.setState({ isLoading: false })
@@ -84,7 +78,7 @@ export default class CreateAccount extends React.Component {
     return (
       <ScrollView contentContainerStyle={createAccountStyles.container}>
         <Ionicons style={styles.pageIcon} name="md-people-circle-outline" size={96} color="white" />
-        <Text style={createAccountStyles.logoText}>Create Account</Text>
+        <Text style={createAccountStyles.logoText}>Login</Text>
         <View style={createAccountStyles.inputWrap}>
           <TextInput
             style={styles.input}
@@ -105,9 +99,10 @@ export default class CreateAccount extends React.Component {
             onChangeText={(password) => this.setState({password: password})}
             value={this.state.password}
             secureTextEntry={true}
+            onSubmitEditing={this.login}
           />
           <TouchableOpacity
-            onPress={() => {this.signUp()}}
+            onPress={() => {this.login()}}
             style={{
               ...styles.mt2,
               ...styles.button,
